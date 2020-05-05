@@ -1,12 +1,4 @@
-<header>
-  <span>SPEBACK</span>
-  <ul>
-    <li>top</li>
-    <li>help</li>
-    <li>login</li>
-    <li>signup</li>
-  </ul>
-</header>
+<%= render 'shared/header' %>
 <div id="home_screen">
   <%= image_tag 'top-screen.jpg' %> スライドを共有するサービス
 </div>
@@ -81,8 +73,10 @@
         </div>
       </article>
     </div>
-    <span class="more"
-      >全てのスライドを見る<i class="far fa-hand-point-right"></i
-    ></span>
+    <span class="more">
+      全てのスライドを見る
+      <i class="far fa-hand-point-right"></i>
+    </span>
   </div>
 </div>
+<%= render 'shared/footer' %>
