@@ -15,3 +15,90 @@
  */
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@import "_mediaquery";
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  width: 100vw;
+  height: 3rem;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  top: 0;
+  left: 0;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  box-shadow: 0 0 5px #aaa;
+  .logo {
+    height: 100%;
+    img {
+      height: 100%;
+    }
+  }
+  .menu-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    ul {
+      display: flex;
+      right: 1rem;
+      height: 3rem;
+      margin: 0;
+      li {
+        height: 3rem;
+        line-height: 3rem;
+        list-style: none;
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+      }
+    }
+  }
+}
+.container {
+  position: inherit;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-bottom: 5rem;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  border-top: 1px solid #aaa;
+  background-color: #eee;
+  height: 3rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  .copyritht {
+    height: 3rem;
+    span {
+      height: 3rem;
+      line-height: 3rem;
+    }
+  }
+  ul {
+    display: flex;
+    margin: 0 auto;
+    padding: 0;
+    li {
+      margin-left: 0.4rem;
+      list-style: none;
+      height: 3rem;
+      line-height: 3rem;
+    }
+  }
+}

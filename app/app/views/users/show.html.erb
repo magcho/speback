@@ -1,0 +1,20 @@
+<% provide(:title, @user.name) %>
+<div class="container users-container">
+  <div class="user-info">
+    <%= image_tag 'icon.png', class:'icon' %>
+    <h2><%= @user.name %></h2>
+    <p class="twitter-uid">
+      <i class="fab fa-twitter"></i>
+      @<%= @user.twitter_uid %>
+    </p>
+    <p class="slides-size">
+      20 slides
+    </p>
+  </div>
+  <div class="slides" id="user-slides">
+    <%= render 'slide/slide' %>
+    <%= render 'slide/slide' %>
+    <%= render 'slide/slide' %>
+    <%= render 'slide/slide' %>
+  </div>
+</div>

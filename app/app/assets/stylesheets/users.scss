@@ -1,3 +1,26 @@
-// Place all the styles related to the Users controller here.
+// Place all the styles related to the User controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.users-container {
+  padding-top: 4rem;
+  display: flex;
+  justify-content: end;
+}
+.user-info {
+  width: 30%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 100%;
+  }
+  h2{
+    margin: 0;
+  }
+}
+#user-slides{
+  flex-wrap: wrap;
+}
+

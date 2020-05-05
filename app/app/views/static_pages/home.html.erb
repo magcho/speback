@@ -1,4 +1,3 @@
-<%= render 'shared/header' %>
 <div id="home_screen">
   <%= image_tag 'top-screen.jpg' %> スライドを共有するサービス
 </div>
@@ -7,71 +6,32 @@
   <div class="event">
     <h3>#Rubyconf</h3>
     <div class="slides">
-      <article>
-        <%= image_tag 'slide.png' %>
-        <div class="slide-info">
-          <%= image_tag 'icon.png' %>
-          <span class="username">magcho</span>
-        </div>
-      </article>
-      <article>
-        <%= image_tag 'slide.png' %>
-        <div class="slide-info">
-          <%= image_tag 'icon.png' %>
-          <span class="username">magcho</span>
-        </div>
-      </article>
-      <article>
-        <%= image_tag 'slide.png' %>
-        <div class="slide-info">
-          <%= image_tag 'icon.png' %>
-          <span class="username">magcho</span>
-        </div>
-      </article>
-      <article>
-        <%= image_tag 'slide.png' %>
-        <div class="slide-info">
-          <%= image_tag 'icon.png' %>
-          <span class="username">magcho</span>
-        </div>
-      </article>
+      <%= render 'slide/slide' %>
+      <%= render 'slide/slide' %>
+      <%= render 'slide/slide' %>
+      <%= render 'slide/slide' %>
+      <%= render 'slide/slide' %>
+      <%= render 'slide/slide' %>
+      <%= render 'slide/slide' %>
+      <%= render 'slide/slide' %>
+      <%= render 'slide/slide' %>
     </div>
-    <span class="more"
-      >全てのスライドを見る<i class="far fa-hand-point-right"></i
-    ></span>
+    <span class="more">全てのスライドを見る<i class="far fa-hand-point-right"></i></span>
   </div>
   <div class="event">
     <h3>#PHPCon</h3>
     <div class="slides">
-      <article>
-        <%= image_tag 'slide.png' %>
-        <div class="slide-info">
-          <%= image_tag 'icon.png' %>
-          <span class="username">magcho</span>
-        </div>
-      </article>
-      <article>
-        <%= image_tag 'slide.png' %>
-        <div class="slide-info">
-          <%= image_tag 'icon.png' %>
-          <span class="username">magcho</span>
-        </div>
-      </article>
+      <%= render 'slide/slide' %>
+
     </div>
-    <span class="more"
-      >全てのスライドを見る<i class="far fa-hand-point-right"></i
-    ></span>
+    <span class="more">全てのスライドを見る<i class="far fa-hand-point-right"></i></span>
   </div>
   <div class="event">
     <h3>#GopherConf</h3>
     <div class="slides">
-      <article>
-        <%= image_tag 'slide.png' %>
-        <div class="slide-info">
-          <%= image_tag 'icon.png' %>
-          <span class="username">magcho</span>
-        </div>
-      </article>
+      <%= render 'slide/slide' %>
+      <%= render 'slide/slide' %>
+      <%= render 'slide/slide' %>
     </div>
     <span class="more">
       全てのスライドを見る
@@ -79,4 +39,3 @@
     </span>
   </div>
 </div>
-<%= render 'shared/footer' %>
