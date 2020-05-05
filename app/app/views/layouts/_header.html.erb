@@ -11,8 +11,13 @@
     <ul>
       <li>top</li>
       <li>help</li>
-      <li>login</li>
+      <% if logged_in? %>
+      <li>settings</li>
+      <li><%= link_to 'logout', logout_path %></li>
+      <% else %>
+      <li><%= link_to 'login', signup_path %></li>
       <li>signup</li>
+      <% end %>
     </ul>
   </div>
 </header>

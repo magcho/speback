@@ -9,21 +9,25 @@
 # ユーザー
 User.create!(
   name:  "Example User",
-  twitter_uid: 'example123',
+  twitter_uid: '0123456012341',
+  twitter_id: 'example',
   icon_path: 'exampe.com'
 )
 User.create!(
   name:  "magcho1",
-  twitter_uid: 'magcho0001',
-  icon_path: 'exampe.com'
+  twitter_uid: '012345601242',
+  icon_path: 'exampe.com',
+  twitter_id: 'example'
 )
 User.create!(
   name:  "magcho2",
-  twitter_uid: 'magcho0002',
-  icon_path: 'exampe.com'
+  twitter_uid: '0123456012343',
+  icon_path: 'exampe.com',
+  twitter_id: 'example'
 )
 User.create!(
   name:  "magcho3",
-  twitter_uid: 'maghco0003',
-  icon_path: 'exampe.com'
+  twitter_uid: '0123456012344',
+  icon_path: 'exampe.com',
+  twitter_id: 'example'
 )

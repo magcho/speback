@@ -1,11 +1,11 @@
 <% provide(:title, @user.name) %>
 <div class="container users-container">
   <div class="user-info">
-    <%= image_tag 'icon.png', class:'icon' %>
+    <%= image_tag @user.icon_path , class:'icon' %>
     <h2><%= @user.name %></h2>
     <p class="twitter-uid">
       <i class="fab fa-twitter"></i>
-      @<%= @user.twitter_uid %>
+      @<%= @user.twitter_id %>
     </p>
     <p class="slides-size">
       20 slides

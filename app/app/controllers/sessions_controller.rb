@@ -1,37 +1,33 @@
-class SesstionsController < ApplicationController
-  def index
-    rendrer
-  end
-  def show
-  end
-
+class SessionsController < ApplicationController
+  include SessionsHelper
   def create
     unless request.env['omniauth.auth'][:uid]
       flash[:danger] = '連携に失敗しました'
       redirect_to root_url
     end
-
     user_data = request.env['omniauth.auth']
-    user = User.find_by(uid: user_data[:uid])
-    if user
+    user = User.find_by(twitter_uid: user_data[:uid])
+    if user #既存ユーザーチェック
       log_in user
-      flash[:success] = 'ログインしました'
+      flash[:success] = user.name + 'でログインしました'
       redirect_to root_url
     else
       new_user = User.new(
-        uid: user_data[:uid],
+        twitter_uid: user_data[:uid],
+        twitter_id: user_data[:info][:nickname],
         name: user_data[:info][:name],
-        icon_path: user_data[:info][:image]
+        icon_path: user_data[:info][:image],
       )
       if new_user.save
         log_in new_user
-        flash[:success] = 'ようこそ' 
+        flash[:success] = 'ユーザー登録成功'
       else
-        flash[:danger] = "ユーザー登録できませんでした"
+        flash[:danger] = '予期せぬエラーが発生しました'
       end
       redirect_to root_url
     end
   end
+
 
   def destroy
     log_out if logged_in?
