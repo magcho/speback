@@ -1,21 +1,21 @@
-<% provide(:title, 'Sign up') %>
+<% provide(:title, 'Login') %>
 <div class="signup">
   <div id="signup-container">
-    <h1>Sign up</h1>
+    <h1>Login</h1>
     <%= link_to '/auth/twitter', class:'anker' do %>
       <div class="twitter-login sns-login">
         <i class="fab fa-twitter"></i>
-        <span>Twitterで登録</span>
+        <span>Twitterでログイン</span>
       </div>
     <% end %>
     <div id="or">OR</div>
     <%= link_to '/auth/github', class:'anker' do %>
       <div class="github-login sns-login">
         <i class="fab fa-github"></i>
-        <s><span>Githubで登録</span></s>
+        <s><span>Githubでログイン</span></s>
         <div class="tooltip">Github連携は未実装</div>
       </div>
     <% end %>
-    <p><%= link_to 'ログインはこちら', login_path %></p>
+    <p><%= link_to '新規登録はこちら', signup_path %></p>
   </div>
 </div>

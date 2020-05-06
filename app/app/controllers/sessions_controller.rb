@@ -1,5 +1,11 @@
 class SessionsController < ApplicationController
   include SessionsHelper
+
+  #ログイン画面
+  def new
+  end
+
+  # auth apiからのコールバック
   def create
     unless request.env['omniauth.auth'][:uid]
       flash[:danger] = '連携に失敗しました'
