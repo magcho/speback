@@ -1,23 +1,54 @@
 <header>
+
   <div class="logo">
     <%= link_to root_url do %>
     <%= image_tag 'logo.svg' %>
     <% end %>
   </div>
+  <form action="" method="get">
+    <input type="text" name="" id="" />
+  </form>
   <div class="menu-container">
-    <form action="" method="get">
-      <input type="text" name="" id="" />
-    </form>
-    <ul>
-      <li>top</li>
-      <li>help</li>
-      <% if logged_in? %>
-      <li>settings</li>
-      <li><%= link_to 'logout', logout_path %></li>
-      <% else %>
-      <li><%= link_to 'login', signup_path %></li>
-      <li>signup</li>
+    <% if logged_in? %>
+      <div class="item toggle" id="menu-check">
+        <input type="checkbox">
+        <%= image_tag current_user.icon_path %>
+      </div>
+      <ul id="dropdown-items">       
+      <%= link_to user_path(current_user) do %>
+       <li class="item">My page</li>
       <% end %>
-    </ul>
+      <%= link_to user_path(current_user) do %>
+        <li class="item">Uplpad</li>
+      <% end %>
+      <%= link_to user_path(current_user) do %>
+      <li class="item">My account</li>
+      <% end %>
+      <%= link_to '/logout' do %>
+        <li class="item">Logout</li>
+      <% end %>
+      </ul>
+      <script>
+        document.getElementById('menu-check').addEventListener('change',
+          (e)=>{
+            document.getElementById('dropdown-items').style.visibility = 'visible'
+            document.addEventListener('click', ()=>{
+              document.getElementById('menu-check').checked = false;
+              document.getElementById('dropdown-items').style.visibility = 'hidden'
+            })
+          }
+        )
+      </script>
+    <% else %>
+      <div class="login-container">
+        <%= link_to signup_path do %>
+          <button>Login</button>
+        <% end %>
+        <%= link_to signup_path do %>
+          <button>Signup</button>
+        <% end %>
+      </div>
+    <% end %>
   </div>
+  
 </header>
