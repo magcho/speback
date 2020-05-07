@@ -31,3 +31,12 @@ User.create!(
   icon_path: 'exampe.com',
   twitter_id: 'example'
 )
+
+
+#slides
+Slide.create!(
+  user_id: 1,
+  start_at: Time.zone.now,
+  close_at: Time.zone.now + 2.hours,
+  originfile_path: 'asdf'
+)

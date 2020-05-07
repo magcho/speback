@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_163445) do
+ActiveRecord::Schema.define(version: 2020_05_07_160236) do
 
   create_table "slides", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_163445) do
     t.datetime "close_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "originfile_path"
     t.index ["user_id"], name: "index_slides_on_user_id"
   end
 
