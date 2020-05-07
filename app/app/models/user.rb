@@ -4,10 +4,10 @@ class User < ApplicationRecord
             foreign_key: "user_id",
             dependent: :destroy
 
-  validates(:name, presence: true)
-  validates(:twitter_uid, presence: true)
-  validates(:twitter_id, presence: true)
-  validates(:icon_path, presence: true, length: {maximum: 255})
+  validates :name, presence: true
+  validates :twitter_uid, presence: true
+  validates :twitter_id, presence: true
+  validates :icon_path, presence: true, length: {maximum: 255}
 
   before_save :get_fullsize_iconpath
 

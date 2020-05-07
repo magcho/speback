@@ -7,7 +7,10 @@ gem 'dotenv-rails'
 gem 'omniauth-twitter'
 gem 'font-awesome-sass'
 gem 'semantic-ui-sass'
-
+group :development, :test do
+  gem 'rspec-rails', '~> 4.0.0'
+  gem 'factory_bot_rails'
+end
 
 ## default package
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -1,11 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  twitter_uid: MyString
-  icon_path: MyString
+example:
+  name: Twitter
+  twitter_uid: 783214
+  twitter_id: twitter 
+  icon_path: https://pbs.twimg.com/profile_images/1111729635610382336/_65QFl7B.png
 
-two:
-  name: MyString
-  twitter_uid: MyString
-  icon_path: MyString
+
+magcho:
+  name: magcho
+  twitter_uid: 1041634153
+  twitter_id: magcho0527
+  icon_path: http://pbs.twimg.com/profile_images/1223111460613607428/Uob63lDX.jpg
