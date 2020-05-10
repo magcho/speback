@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_102640) do
+ActiveRecord::Schema.define(version: 2020_05_10_113025) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 2020_05_10_102640) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "link"
     t.string "coverimg_path"
+  end
+
+  create_table "hashtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.bigint "event_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_hashtags_on_event_id"
   end
 
   create_table "slides", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -41,5 +49,6 @@ ActiveRecord::Schema.define(version: 2020_05_10_102640) do
     t.string "twitter_id"
   end
 
+  add_foreign_key "hashtags", "events"
   add_foreign_key "slides", "users"
 end

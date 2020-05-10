@@ -49,3 +49,17 @@ Event.create!(
   link: 'https://cookpad.connpass.com/event/173851/',
   coverimg_path: 'cover.png'
 )
+
+#hashtag
+Hashtag.create!(
+  name: 'sampleConf',
+  event_id: 1
+)
+Hashtag.create!(
+  name: 'sample-conf',
+  event_id: 1
+)
+Hashtag.create!(
+  name: 'サンプルカンファレンス',
+  event_id: 1
+)

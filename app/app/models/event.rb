@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_many :Hashtag
+  has_many :Hashtags
 
   validates :name, presence: true
   validates :start_at, presence: true
