@@ -40,3 +40,12 @@ Slide.create!(
   close_at: Time.zone.now + 2.hours,
   originfile_path: 'asdf'
 )
+
+#events
+Event.create!(
+  name: 'サンプルカンファレンス',
+  start_at: Time.zone.now + 2.hours,
+  close_at: Time.zone.now + 3.hours,
+  link: 'https://cookpad.connpass.com/event/173851/',
+  coverimg_path: 'cover.png'
+)
