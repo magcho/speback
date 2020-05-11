@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+@import "pure-min.css";
+
 #event-container{
   margin-top: 4rem;
   #cover-img{
@@ -26,10 +28,15 @@
     margin-bottom: 0;
   }
   #hashtag{
+    #services{
+      display: flex;
+    }
     ul{
       margin: 0;
       padding: 0;
+      width: fit-content;
       display: inline-flex;
+      color: red;
       li{
         list-style: none;
         padding-right: .7rem;
@@ -68,6 +75,65 @@
         height: 2rem;
         display: block;
         margin-left: 0.4rem;
+      }
+    }
+  }
+}
+
+
+#event-new-container{
+  background-color: #ccc;
+  width: 100vw;
+  height: calc(100vh - 6rem);
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  #new-event-area{
+    box-shadow: 0  0  20px #777;
+    padding: 3rem;
+    margin: auto;
+    background-color: white;
+    h1{
+      width: 100%;
+      text-align: center;
+    }
+    form{
+      label{
+        color: #333;
+      }
+      input{
+        margin-bottom: 1rem;
+      }
+      .date-input-container{
+        padding-right: 1rem;
+      }
+      .date-input-flex{
+        flex-grow: 1;
+        &:before{
+          content: '@';
+        }
+      }
+      .time-inputs{
+        display: flex;
+        flex-shrink: 0;
+        color: white
+      }
+      .required-item-label{
+        display: inline;
+      }
+      span.required{
+        color: #d00;
+        font-size: .8em;
+      }
+      .has-description{
+        display: inline;
+      }
+      span.description{
+        color: #777;
+        font-size: .8em;
+      }
+      #button-area{
+        text-align: right;
       }
     }
   }
