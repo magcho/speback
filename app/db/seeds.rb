@@ -11,24 +11,24 @@ User.create!(
   name:  "Example User",
   twitter_uid: '0123456012341',
   twitter_id: 'example',
-  icon_path: 'exampe.com'
+  icon_path: 'https://pbs.twimg.com/profile_images/1111729635610382336/_65QFl7B.png'
 )
 User.create!(
   name:  "magcho1",
   twitter_uid: '012345601242',
-  icon_path: 'exampe.com',
+  icon_path: 'https://pbs.twimg.com/profile_images/1111729635610382336/_65QFl7B.png',
   twitter_id: 'example'
 )
 User.create!(
   name:  "magcho2",
   twitter_uid: '0123456012343',
-  icon_path: 'exampe.com',
+  icon_path: 'https://pbs.twimg.com/profile_images/1111729635610382336/_65QFl7B.png',
   twitter_id: 'example'
 )
 User.create!(
   name:  "magcho3",
   twitter_uid: '0123456012344',
-  icon_path: 'exampe.com',
+  icon_path: 'https://pbs.twimg.com/profile_images/1111729635610382336/_65QFl7B.png',
   twitter_id: 'example'
 )
 
