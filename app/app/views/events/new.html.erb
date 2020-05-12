@@ -1,21 +1,46 @@
 <% provide(:title, '新規イベントの登録') %>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
 <script>
   var config = {
         allowInput: true,
         defaultDate: Date.now(),
-        dateFormat: "'y m/d"
+        dateFormat: "'y m/d",
+        onChange: function(){}
       }
-  window.onload = function(){
-    document.getElementById('event-start-date-at').flatpickr(config)
-    document.getElementById('event-close-date-at').flatpickr(config)
-  }
+
+  document.addEventListener('turbolinks:load',
+  function(){
+    document.getElementById('event-start-date-at').flatpickr({
+      allowInput: true,
+        defaultDate: Date.now(),
+        dateFormat: "'y m/d",
+        locale: 'ja',
+        onChange: function(selectedDates){
+          document.getElementById('_start_at_1i').value = selectedDates[0].getFullYear()
+          document.getElementById('_start_at_2i').value = selectedDates[0].getMonth()
+          document.getElementById('_start_at_3i').value = selectedDates[0].getDate()
+        }
+    })
+    document.getElementById('event-close-date-at').flatpickr({
+      allowInput: true,
+        defaultDate: Date.now(),
+        dateFormat: "'y m/d",
+        locale: 'ja',
+        onChange: function(selectedDates){
+          document.getElementById('_close_at_1i').value = selectedDates[0].getFullYear()
+          document.getElementById('_close_at_2i').value = selectedDates[0].getMonth()
+          document.getElementById('_close_at_3i').value = selectedDates[0].getDate()
+        }
+    })
+  })
 </script>
 <div id="event-new-container">
   <div id="new-event-area">
     <h1>新規イベントの登録</h1>
-    <%= form_with(model: @event, local: true, class: "pure-form pure-form-stacked") do |f| %>
+    <%= form_for([@event], local: true, html: {class: "pure-form pure-form-stacked"}) do |f| %>
+      <%= render 'events/form_error' %>
       <fieldset>
         <label for="event-name" class="required-item-label">イベント名</label>
         <span class="required">※必須項目</span>
@@ -35,10 +60,7 @@
             <label for="event-start-at" class="required-item-label">開始時刻</label>
             <span class="required">※必須項目</span>
             <div class="pure-g date-input-container">
-              <%= f.date_field :start_at,
-                id: 'event-start-date-at',
-                class: 'pure-u-1-2 date-input-flex',
-                required: true %>
+              <input type="date" id="event-start-date-at" class="pure-u-1-2 date-input-flex" required>
               <div class="time-inputs">
                 <%= f.time_select :start_at,
                   id: 'event-start-time-at',
@@ -52,10 +74,7 @@
             <label for="event-start-at" class="required-item-label">終了時刻</label>
             <span class="required date-input-container">※必須項目</span>
             <div class="pure-g">
-              <%= f.date_field :close_at,
-                id: 'event-close-date-at',
-                class: 'pure-u-1-2 date-input-flex',
-                required: true %>
+              <input type="date" id="event-close-date-at" class="pure-u-1-2 date-input-flex" required>
               <div class="time-inputs">
                 <%= f.time_select :close_at,
                   id: 'event-close-time-at',
@@ -69,14 +88,16 @@
         
         <label for="event-hashtag" class="has-description">ハッシュタグ</label>
         <span class="description">カンマ区切りで複数指定ができます。</span>
-        <%= f.text_field :hashtag,
-          id: "event-hashtag",
-          placeholder: "(例) #hogeConf,#fugaLT",
-          class: "pure-u-1" %>
+        <%= # f.text_field :hashtags,
+          # id: "event-hashtag",
+          # placeholder: "(例) #hogeConf,#fugaLT",
+          # class: "pure-u-1"
+        %>
+        <input type="text" id="event-hashtag" class="pure-u-1" placeholder="(例) #hogeConf,#fugaLT" name="hashtags"/>
         <div id="coverimg-area">
           <label for="event-coverimg" class="has-description">イベントバナー画像</label>
           <span class="description">PNG JPG GIF 1MBまで</span>
-          <%= f.file_field :coverimg, 
+          <%= f.file_field :coverimg_path, 
             accept: "image/png,image/jpeg,iamge/gif",
             id: 'event-coverimg' %>
         </div>
@@ -88,3 +109,4 @@
     <% end %>
   </div>
 </div>
+

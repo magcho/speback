@@ -98,6 +98,9 @@
       text-align: center;
     }
     form{
+      fieldset{
+        border: none;
+      }
       label{
         color: #333;
       }

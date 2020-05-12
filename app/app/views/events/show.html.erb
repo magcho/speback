@@ -2,8 +2,8 @@
 <div class="container" id="event-container">
   <div id="infomation">
     <div id="cover-img">
-      <%= image_tag @event.coverimg_path %>
-    </div>
+      <%= image_tag @event.coverimg_path.url if @event.coverimg_path? %>
+      </div>
     <h1 id="title"><%= @event.name %></h1>
     <div id="time">
       <i class="far fa-calendar-alt"></i>
