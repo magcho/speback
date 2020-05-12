@@ -13,15 +13,22 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    # @event.name = params[:name]
-    # @event.start_at = params[:start_at]
-    logger.debug(@event.inspect)
-    logger.debug(@event.valid?)
+    hashtags = params[:hashtags].split(',')
+
     if @event.save
+      if hashtags.any?
+        hashtags.map { |hashtag|
+          @hashtag = Hashtag.new(name: hashtag.gsub('#',''), event_id: @event.id)
+          if @hashtag.save
+          else
+            flash[:error] = 'ハッシュタグを保存できませんでした'
+          end
+        }
+      end
       flash[:success] = 'イベントを登録しました'
       redirect_to @event
     else
-      flash[:error] = '作成できませんでした。'
+      flash[:error] = '作成できませんでした'
       redirect_to new_event_path
     end
   end

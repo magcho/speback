@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   resources :users
   resources :slides
   resources :events do
-    resources :hashtags  
+    resources :hashtags
   end
 end
