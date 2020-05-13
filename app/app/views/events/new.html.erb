@@ -36,8 +36,8 @@
     })
   })
 </script>
-<div id="event-new-container">
-  <div id="new-event-area">
+<div id="new-container">
+  <div id="new-area">
     <h1>新規イベントの登録</h1>
     <%= form_for([@event], local: true, html: {class: "pure-form pure-form-stacked"}) do |f| %>
       <%= render 'events/form_error' %>

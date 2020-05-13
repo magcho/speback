@@ -36,9 +36,12 @@ User.create!(
 #slides
 Slide.create!(
   user_id: 1,
+  title: 'サンプルスライド',
+  summary: "これはサンプルです" * 100,
+  draft: false,
   start_at: Time.zone.now,
   close_at: Time.zone.now + 2.hours,
-  originfile_path: 'asdf'
+  originfile_path: 'asdf',
 )
 
 #events

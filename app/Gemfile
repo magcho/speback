@@ -10,6 +10,7 @@ gem 'semantic-ui-sass'
 gem 'i18n'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'dropzonejs-rails'
 group :development, :test do
   gem 'rspec-rails', '~> 4.0.0'
   gem 'factory_bot_rails'

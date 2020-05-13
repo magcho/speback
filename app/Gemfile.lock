@@ -86,6 +86,8 @@ GEM
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
+    dropzonejs-rails (0.8.4)
+      rails (> 3.1)
     erubi (1.9.0)
     factory_bot (5.2.0)
       activesupport (>= 4.2.0)
@@ -263,6 +265,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   carrierwave
   dotenv-rails
+  dropzonejs-rails
   factory_bot_rails
   font-awesome-sass
   i18n

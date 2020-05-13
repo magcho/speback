@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_113025) do
+ActiveRecord::Schema.define(version: 2020_05_13_025053) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 2020_05_10_113025) do
     t.index ["event_id"], name: "index_hashtags_on_event_id"
   end
 
+  create_table "pages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "path"
+    t.bigint "slide_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["slide_id"], name: "index_pages_on_slide_id"
+  end
+
   create_table "slides", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "start_at"
@@ -37,6 +45,9 @@ ActiveRecord::Schema.define(version: 2020_05_10_113025) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "originfile_path"
+    t.string "title"
+    t.text "summary"
+    t.boolean "draft"
     t.index ["user_id"], name: "index_slides_on_user_id"
   end
 
@@ -50,5 +61,6 @@ ActiveRecord::Schema.define(version: 2020_05_10_113025) do
   end
 
   add_foreign_key "hashtags", "events"
+  add_foreign_key "pages", "slides"
   add_foreign_key "slides", "users"
 end

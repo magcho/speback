@@ -1,0 +1,43 @@
+<% provide(:title, 'スライドのアップロード') %>
+<div id="new-container">
+  <div id="new-area">
+    <h1>スライドのアップロード</h1>
+    <%= form_for @slide, html:{class: 'pure-form pure-form-stacked'} do |f| %>
+      <fieldset>
+        
+        <div class="file-upload-container" id="clickable-area">
+          <%= f.file_field :originfile, style: "display: none;", id: "slide-upload" %>
+          <div id="insert-text">
+            <div><s>ドラッグ&ドロップ</s></div>
+            <div>クリックでファイルをアップロード</div>
+            <div><i class="fas fa-file-upload"></i></div>
+            <div>PDFファイル 10MBまで</div>
+          </div>
+        </div>
+        
+
+
+        <label for="slide-title" class="required-item-label">タイトル</label>
+        <span class="required">※必須項目</span>
+        <%= f.text_field :title, id:'slide-title', class: "pure-u-1" %>
+        <label for="slide-description">スライドの説明</label>
+        <%= f.text_area :summary, id: "slide-description", class: "pure-u-1" %>
+        <div id="button-area">
+          <%= f.submit 'アップロード', class: 'pure-button pure-button-primary' %>    
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
+<script>
+  document.getElementById('clickable-area').addEventListener('click', function(){
+    document.getElementById('slide-upload').click()
+  })
+  document.getElementById('clickable-area').addEventListener('drop', function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    console.log('xs')
+    document.getElementById('slide-uplpad').file = e.dataTransfer.files
+  },false)
+</script>
+
