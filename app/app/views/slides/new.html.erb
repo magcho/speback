@@ -1,12 +1,43 @@
 <% provide(:title, 'スライドのアップロード') %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
+<script>
+  document.addEventListener('turbolinks:load',
+  function(){
+    document.getElementById('slide-start-date-at').flatpickr({
+      allowInput: true,
+       
+        dateFormat: "'y m/d",
+        locale: 'ja',
+        onChange: function(selectedDates){
+          document.getElementById('_start_at_1i').value = selectedDates[0].getFullYear()
+          document.getElementById('_start_at_2i').value = selectedDates[0].getMonth()
+          document.getElementById('_start_at_3i').value = selectedDates[0].getDate()
+        }
+    })
+    document.getElementById('slide-close-date-at').flatpickr({
+      allowInput: true,
+      
+        dateFormat: "'y m/d",
+        locale: 'ja',
+        onChange: function(selectedDates){
+          document.getElementById('_close_at_1i').value = selectedDates[0].getFullYear()
+          document.getElementById('_close_at_2i').value = selectedDates[0].getMonth()
+          document.getElementById('_close_at_3i').value = selectedDates[0].getDate()
+        }
+    })
+  })
+</script>
+
 <div id="new-container">
   <div id="new-area">
     <h1>スライドのアップロード</h1>
-    <%= form_for @slide, html:{class: 'pure-form pure-form-stacked'} do |f| %>
+    <%= form_for [@slide], local: true, html:{class: 'pure-form pure-form-stacked'} do |f| %>
       <fieldset>
         
         <div class="file-upload-container" id="clickable-area">
-          <%= f.file_field :originfile, style: "display: none;", id: "slide-upload" %>
+          <%= f.file_field :originfile_path, style: "display: none;", id: "slide-upload" %>
           <div id="insert-text">
             <div><s>ドラッグ&ドロップ</s></div>
             <div>クリックでファイルをアップロード</div>
@@ -14,14 +45,59 @@
             <div>PDFファイル 10MBまで</div>
           </div>
         </div>
-        
-
 
         <label for="slide-title" class="required-item-label">タイトル</label>
         <span class="required">※必須項目</span>
         <%= f.text_field :title, id:'slide-title', class: "pure-u-1" %>
+        
+        <div class="pure-g">
+          <div class="pure-g pure-u-1-2">
+            <label for="slide-start-at">開始時刻</label>
+            <div class="pure-g date-input-container">
+              <input type="date" id="slide-start-date-at" class="pure-u-1-2 date-input-flex">
+              <div class="time-inputs">
+                <%= f.time_select :start_at,
+                  id: 'event-start-time-at',
+                  class: 'pure-u-1-2',
+                  default: Time.local(0, 1, 1, 0, 0, 0, 0) %>
+              </div>
+            </div>
+          </div>
+          <div class="pure-g pure-u-1-2">
+            <label for="slide-start-at">終了時刻</label>
+            <div class="pure-g">
+              <input type="date" id="slide-close-date-at" class="pure-u-1-2 date-input-flex">
+              <div class="time-inputs">
+                <%= f.time_select :close_at,
+                  id: 'event-close-time-at',
+                  class: 'pure-u-1-2',
+                  default: Time.local(0, 1, 1, 0, 0, 0, 0) %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
         <label for="slide-description">スライドの説明</label>
         <%= f.text_area :summary, id: "slide-description", class: "pure-u-1" %>
+        
+        <div class="pure-g">
+          <div class="pure-u-1-2">
+            <label for="slide-event">スライドを発表したイベント</label>
+            <input type="text" id="side-event">
+          </div>
+          <div class="pure-u-1-2">
+            <label for="slide-draft">公開設定</label>
+            <div id="slide-draft-radio">
+              <%= f.radio_button :draft, true, checked: true, id: "slide-draft-true" %>
+              <label for="slide-draft-true"><i class="fas fa-check"></i>非公開</label>
+
+              <%= f.radio_button :draft, false, id: "slide-draft-false" %>
+              <label for="slide-draft-false"><i class="fas fa-check"></i>公開</label>
+            </div>
+          </div>
+        </div>
+        
         <div id="button-area">
           <%= f.submit 'アップロード', class: 'pure-button pure-button-primary' %>    
         </div>

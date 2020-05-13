@@ -7,7 +7,6 @@ class EventsController < ApplicationController
   
   def new
     @event = Event.new()
-    # @hashtag = @event.Hashtags.build()    
   end
 
 

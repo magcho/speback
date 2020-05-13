@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :Slides,
+  has_many :slides,
             class_name: "Slide",
             foreign_key: "user_id",
             dependent: :destroy
