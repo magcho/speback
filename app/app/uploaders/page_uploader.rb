@@ -1,4 +1,4 @@
-class SlideUploader < CarrierWave::Uploader::Base
+class PageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -36,7 +36,7 @@ class SlideUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(pdf)
+    %w(jpg jpeg gif png)
   end
 
   # Override the filename of the uploaded files:

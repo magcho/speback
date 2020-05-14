@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   has_many :Hashtags
+  mount_uploader :coverimg_path, CoverimgUploader
   default_scope -> { order(created_at: :desc) }
-  mount_uploader :originfile_path, SlideUploader
 
   validates :name, presence: true
   validates :start_at, presence: true

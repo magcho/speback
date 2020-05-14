@@ -2,6 +2,7 @@ class Slide < ApplicationRecord
   belongs_to :user
   has_many :pages
   default_scope -> { order(created_at: :desc) }
+  mount_uploader :originfile_path, SlideUploader
 
   validates :title, presence: true
   validates :originfile_path, presence: true

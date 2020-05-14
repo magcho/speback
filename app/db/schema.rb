@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_025053) do
+ActiveRecord::Schema.define(version: 2020_05_15_094655) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_025053) do
   end
 
   create_table "pages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "path"
+    t.string "img"
     t.bigint "slide_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "page_num"
     t.index ["slide_id"], name: "index_pages_on_slide_id"
   end
 

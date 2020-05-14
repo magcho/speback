@@ -10,17 +10,16 @@ class SlidesController < ApplicationController
   end
 
   def create
-    # @slide = Slide.create(slide_params)
     @slide = current_user.slides.build(slide_params)
-
-    logger.debug(@slide.inspect)
     if @slide.save
-      redirect_to root_path
+
+      SlidePagesJob.perform_later(@slide.id)
+
+      redirect_to @slide
       flash[:success] = '成功'
     else
       flash[:error] = '保存失敗'
-      render 'new'
-      # redirect_to new_slide_path
+      redirect_to new_slide_path
     end
   end
 
