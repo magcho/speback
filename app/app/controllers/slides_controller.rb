@@ -3,6 +3,10 @@ class SlidesController < ApplicationController
 
   def show
     @slide = Slide.find(params[:id])
+    @page = Page.find_by(slide_id: @slide.id, page_num: 0)
+
+    @nextPage = Page.find_by(slide_id: @slide.id, page_num: params[:id].to_i + 1) if Page.find_by(slide_id: @slide.id, page_num: params[:id].to_i  + 1)
+    render 'pages/show'
   end
 
   def new
@@ -15,7 +19,8 @@ class SlidesController < ApplicationController
 
       SlidePagesJob.perform_later(@slide.id)
 
-      redirect_to @slide
+      # redirect_to root_path
+      redirect_to slide_page_path(@slide, 0)
       flash[:success] = '成功'
     else
       flash[:error] = '保存失敗'

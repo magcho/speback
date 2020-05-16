@@ -1,1 +1,67 @@
-<%= image_tag @page.img.url if @page.img?%>
+<div id="slide-show">
+  <div id="slide">
+    <div id="slide-img" style="background-image: url(<%= @page.img.url %>); background-color: <%= @dominantColor %>"></div>
+  
+
+    <div id="control">
+      <% if @previousPage %>
+        <%= link_to slide_page_path(@slide, @previousPage.page_num) do %>
+          <div id="prevous-clickable" class="clickable"></div>
+        <% end %>
+      <% end %>
+      <% if @nextPage %>
+        <%= link_to slide_page_path(@slide,@nextPage.page_num) do %>
+          <div id="next-clickable" class="clickable"></div>
+        <% end %>
+      <% end %>
+
+      <div id="player-control">
+        <% if @previousPage %>
+          <%= link_to slide_page_path(@slide, @previousPage.page_num) do %>
+            <div class="previous-button">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="previous-button"></div>
+        <% end %>
+        <% if @nextPage %>
+          <%= link_to slide_page_path(@slide,@nextPage.page_num) do %>
+            <div class="next-button">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          <% end %>
+          <% else %>
+          <div class="next-button"></div>
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
+  <div id="comment-area">
+    <div class="comments">
+      <div id="header">
+        <span>コメントのリプレイ</span>
+      </div>
+      <%= image_tag 'icon.png', class: 'comment-icon' %>
+      <p class="comment-text"></p>
+    </div>
+  </div>
+  
+  <div id="slide-info">
+    <h1><%= @slide.title %></h1>
+    <div id="author">
+      <%= image_tag @user.icon_path, class: 'icon' %>
+      <span class="user-name">
+        <%= @user.name %>
+      </span>
+    </div>
+  </div>
+
+  <div id="related-slides" class="slides">
+    <%= render 'slide/slide' %>
+    <%= render 'slide/slide' %>
+    <%= render 'slide/slide' %>
+  </div>
+</div>

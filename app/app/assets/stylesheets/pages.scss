@@ -1,3 +1,152 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#slide-show{
+  display: grid;
+  margin-top: 3rem;
+  width: 100vw;
+  grid-template-columns: 2fr 1fr;
+  background-color: black;
+  #slide{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    position: relative;
+    margin: 2rem;
+    overflow-y: hidden;
+    img{
+      width: 100%;
+    }
+    #slide-img{
+      // 100% * (9/16) = 56.25%
+      padding-top: 56.25%;
+      width: 100%;
+      height: 200px;
+      background-color: #222;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    #control{
+      z-index: 3;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: calc(100% + 3rem);
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      transition: transform 0.3s;
+      &:hover{
+        transform: translateY(-3rem);
+      }
+      .clickable{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: calc(100% - 3rem);
+        width: 50%;
+        z-index: 2;
+        &#previous-clickable{
+          left: 0;
+        }
+        &#next-clickable{
+          left: 50%;
+        }
+      }
+      #player-control{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        padding: 0 1rem;
+        background-color: #0002;
+        .previous-button,.next-button{
+          width: 1.5rem;
+        }
+        i{
+          color: white;
+          line-height: 3rem;
+          font-size: 1.5rem;
+          padding-right: 1rem;
+          &:hover{
+            color: #999;
+          }
+          a{
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+  #comment-area{
+    color: white;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    #header{
+      height: 2.5rem;
+      width: 100%;
+      background-color: #212121;
+      span{
+        line-height: 2.5rem;
+      }
+    }
+    img{
+      width: 2rem;
+      height: 2rem;
+      border-radius: 100%;
+    }
+  }
+  #slide-info{
+    background-color: white;
+    #author{
+      display: flex;
+      .icon{
+        height: 3rem;
+        width: 3rem;
+        border-radius: 100%;
+      }
+      .user-name{
+        line-height: 3rem;
+        height: 3rem;
+      }
+    }
+  }
+
+}
+
+#related-slides {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+  article {
+    box-shadow: 0 0 5px #aaa;
+    width: 50%;
+    margin: 0.5rem;
+    flex-shrink: 0;
+    border-radius: 3px;
+    img {
+      flex-shrink: 0;
+      margin: 0 auto;
+      width: 100%;
+      margin: 0;
+    }
+    .slide-info {
+      display: flex;
+      padding-left: 0.3rem;
+      padding-bottom: 0.3rem;
+      img {
+        height: 2rem;
+        width: 2rem;
+        border-radius: 100%;
+      }
+      .username {
+        line-height: 2rem;
+        height: 2rem;
+        display: block;
+        margin-left: 0.4rem;
+      }
+    }
+  }
+}
