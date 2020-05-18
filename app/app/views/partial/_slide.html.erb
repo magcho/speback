@@ -1,0 +1,11 @@
+<%= link_to slide do %>
+  <article>
+    <% if slide.pages.first %>
+      <div class="thumbnail" style="background-image: url(<%= slide.pages.first.img.url %>);background-color: <%= get_dominant_color(slide.pages.first.img.path) %>;"></div>
+    <% end %>
+    <div class="slide-info">
+      <%= image_tag 'icon.png' %>
+      <span class="username">magcho</span>
+    </div>
+  </article>
+<% end %>

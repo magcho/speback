@@ -8,13 +8,10 @@
       @<%= @user.twitter_id %>
     </p>
     <p class="slides-size">
-      20 slides
+      <%= @user.slides.count %> slides
     </p>
   </div>
   <div class="slides" id="user-slides">
-    <%= render 'slide/slide' %>
-    <%= render 'slide/slide' %>
-    <%= render 'slide/slide' %>
-    <%= render 'slide/slide' %>
+    <%= render partial: 'partial/slide', collection: @user.slides %>
   </div>
 </div>
