@@ -11,4 +11,14 @@ module ApplicationHelper
     end
   end
 
+  # datetime型を日本語っぽい形で日付表示
+  def datetime_to_date_jp_fmt(origin_date)
+    origin_date.strftime("%Y %m/%d")
+  end
+
+  # datetime型を日本語っぽい形で日時表示
+  def datetime_to_time_jp(origin_date)
+    origin_date.strftime("%m/%d %H:%M")
+  end
+
 end

@@ -8,11 +8,11 @@
     <div id="time">
       <i class="far fa-calendar-alt"></i>
       <span id="start_at">
-        <%=  @event.start_at.strftime("%m/%d %H:%M") %>
+        <%=  datetime_to_time_jp(@event.start_at) %>
       </span>
       <span>~</span>
       <span id="close_time">
-        <%= @event.close_at.strftime("%m/%d %H:%M") %>
+        <%= datetime_to_time_jp(@event.close_at) %>
       </span>
     </div>
     <div id="link">

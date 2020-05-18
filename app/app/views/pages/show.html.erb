@@ -40,28 +40,159 @@
 
   </div>
   <div id="comment-area">
-    <div class="comments">
-      <div id="header">
-        <span>コメントのリプレイ</span>
+    <div id="header">
+      <span>コメントのリプレイ</span>
+    </div>
+    <div id="comments">
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト</p>
       </div>
-      <%= image_tag 'icon.png', class: 'comment-icon' %>
-      <p class="comment-text"></p>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテ
+        </p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          🍣
+        </p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>サンプルテキストサンプルテキストサンプルテキストサンプルテキスト</p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+        </p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+        </p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+        </p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+        </p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+        </p>
+      </div>
+
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+        </p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+        </p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+        </p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+        </p>
+      </div>
+      <div class="comment">
+        <div class="comment-icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+        <p class="comment-text">
+          <span class="comment-time">12:12</span>
+          サンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+        </p>
+      </div>
+    </div>
+
+    <div id="comment-form"> 
+      <div class="icon" style="background-image: url(<%= @user.icon_path %>);"></div>
+      <div class="user-name"><%= @user.name %></div>
+      <form action="">
+        <div contenteditable class="text-area">
+          <span class="hashtag">#sample</span>asdfasdf
+        </div>
+        <div class="button-area">
+          <span class="length">120/120</span>
+          <button type="submit">ツイート</button>
+        </div>          
+      </form>
     </div>
   </div>
   
   <div id="slide-info">
-    <h1><%= @slide.title %></h1>
+    <h1 class="title"><%= @slide.title %></h1>
     <div id="author">
       <%= image_tag @user.icon_path, class: 'icon' %>
       <span class="user-name">
         <%= @user.name %>
       </span>
+      <span class="start-at">
+        <%= datetime_to_date_jp_fmt(@slide.start_at) if @slide.start_at? %>
+      </span>
     </div>
+      <%= simple_format(@slide.summary) %>
   </div>
 
-  <div id="related-slides" class="slides">
+  <div id="related-slides">
     <%= render 'slide/slide' %>
     <%= render 'slide/slide' %>
     <%= render 'slide/slide' %>
   </div>
 </div>
+
+<script>
+  document.addEventListener("turbolinks:load", function(){
+    document.getElementById('comment-area').style.setProperty('--height',`${document.getElementById('slide-img').clientHeight}px`)
+  })
+</script>
+<script data-turbolinks-eval="false">
+  // 初期レンダリング時のみ実行
+  window.addEventListener('resize', function(){
+    document.getElementById('comment-area').style.setProperty('--height',`${document.getElementById('slide-img').clientHeight}px`)
+  })
+</script>
