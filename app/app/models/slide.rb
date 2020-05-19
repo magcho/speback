@@ -1,5 +1,6 @@
 class Slide < ApplicationRecord
   belongs_to :user
+  # belongs_to :event
   has_many :pages
   default_scope -> { order(created_at: :desc) }
   mount_uploader :originfile_path, SlideUploader

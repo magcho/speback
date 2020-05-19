@@ -30,11 +30,11 @@
       </div>
     <% end %>
   </div>
-  <div class="slides-view">
-    <%= render 'slide/slide' %>
-    <%= render 'slide/slide' %>
-    <%= render 'slide/slide' %>
-    <%= render 'slide/slide' %>
-    <%= render 'slide/slide' %>
+  <div class="slides" id="event-slides">
+    <% if @event.slides.any?  %>
+      <%= render partial: 'partial/slide', collection: @event.slides %>
+    <% else %>
+      <div>まだこのイベントに登録されたスライドはありません。</div>
+    <% end %>
   </div>
 </div>

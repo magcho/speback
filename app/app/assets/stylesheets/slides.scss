@@ -1,48 +1,7 @@
 // Place all the styles related to the Slide controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.slides {
-  display: flex;
-  overflow-x: scroll;
-  a{
-    display: block;
-    box-shadow: 0 0 5px #aaa;
-    width: 30%;
-    margin: 0.5rem;
-    flex-shrink: 0;
-    border-radius: 3px;
-    text-decoration: none;
-    .thumbnail {
-      // 9/16 = 56.25%
-      padding-top: 56.25%;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      width: 100%;
-      flex-shrink: 0;
-      margin: 0 auto;
-      width: 100%;
-      margin: 0;
-    }
-    .slide-info {
-      display: flex;
-      padding-left: 0.3rem;
-      padding-bottom: 0.3rem;
-      img {
-        height: 2rem;
-        width: 2rem;
-        border-radius: 100%;
-      }
-      .username {
-        line-height: 2rem;
-        height: 2rem;
-        display: block;
-        margin-left: 0.4rem;
-        color: balck;
-      }
-    }
-  }
-}
+@import "partial/slide";
 #new-area{
   #slide-event{
     padding-left: 1rem;

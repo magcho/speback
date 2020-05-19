@@ -1,0 +1,11 @@
+<div class="event">
+  <%= link_to event do %>
+    <h3><%= event.name %></h3>
+  <% end %>
+  <div class="slides">
+    <%= render partial: 'partial/slide', collection: event.slides %>
+  </div>
+  <%= link_to event do %>
+    <span class="more">全てのスライドを見る<i class="far fa-hand-point-right"></i></span>
+  <% end %>
+</div>

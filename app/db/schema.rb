@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_094655) do
+ActiveRecord::Schema.define(version: 2020_05_18_130615) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 2020_05_15_094655) do
     t.string "title"
     t.text "summary"
     t.boolean "draft"
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_slides_on_event_id"
     t.index ["user_id"], name: "index_slides_on_user_id"
   end
 

@@ -3,39 +3,7 @@
 </div>
 <div class="container">
   <h2>進行中のイベント</h2>
-  <div class="event">
-    <h3>#Rubyconf</h3>
-    <div class="slides">
-      <%= render 'slide/slide' %>
-      <%= render 'slide/slide' %>
-      <%= render 'slide/slide' %>
-      <%= render 'slide/slide' %>
-      <%= render 'slide/slide' %>
-      <%= render 'slide/slide' %>
-      <%= render 'slide/slide' %>
-      <%= render 'slide/slide' %>
-      <%= render 'slide/slide' %>
-    </div>
-    <span class="more">全てのスライドを見る<i class="far fa-hand-point-right"></i></span>
-  </div>
-  <div class="event">
-    <h3>#PHPCon</h3>
-    <div class="slides">
-      <%= render 'slide/slide' %>
-
-    </div>
-    <span class="more">全てのスライドを見る<i class="far fa-hand-point-right"></i></span>
-  </div>
-  <div class="event">
-    <h3>#GopherConf</h3>
-    <div class="slides">
-      <%= render 'slide/slide' %>
-      <%= render 'slide/slide' %>
-      <%= render 'slide/slide' %>
-    </div>
-    <span class="more">
-      全てのスライドを見る
-      <i class="far fa-hand-point-right"></i>
-    </span>
-  </div>
+  <% @events.each do |event| %>
+    <%= render partial: "partial/event_slides_catch", locals: { event: event } %>
+  <% end %>
 </div>

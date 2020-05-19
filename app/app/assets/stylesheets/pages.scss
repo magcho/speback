@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+@import 'partial/slide';
+
 #slide-show{
   display: grid;
   margin-top: 3rem;
@@ -13,6 +15,7 @@
     grid-row: 1 / 2;
     position: relative;
     margin: 1rem;
+    margin-right: 0.5rem;
     overflow-y: hidden;
     img{
       width: 100%;
@@ -85,7 +88,7 @@
     grid-row: 1 / 2;
     border: 1px solid #333;
     margin: 1rem;
-    margin-left: 0;
+    margin-left: 0.5rem;
     position: relative;
     height: var(--height);
     #header{
@@ -235,43 +238,59 @@
     }
   }
 
-  #related-slides {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
+  #related-slides{
     background-color: white;
+    flex-wrap: wrap;
     padding-top: 2rem;
-    article {
-      box-shadow: 0 0 5px #aaa;
+    padding-left: 0.5rem;
+    article{
+      box-sizing: border-box;
       width: calc(50% - 1rem);
-      height: fit-content;
+      margin: 0;
       margin-right: 1rem;
       margin-bottom: 1rem;
+      height: fit-content;
       flex-shrink: 0;
       flex-grow: 0;
-      border-radius: 3px;
-      img {
-        flex-shrink: 0;
-        margin: 0 auto;
-        width: 100%;
-        margin: 0;
-      }
-      .slide-info {
-        display: flex;
-        padding-left: 0.3rem;
-        padding-bottom: 0.3rem;
-        img {
-          height: 2rem;
-          width: 2rem;
-          border-radius: 100%;
-        }
-        .username {
-          line-height: 2rem;
-          height: 2rem;
-          display: block;
-          margin-left: 0.4rem;
-        }
-      }
     }
   }
+  // #related-slides {
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   align-content: flex-start;
+  //   background-color: white;
+  //   padding-top: 2rem;
+  //   article {
+  //     box-shadow: 0 0 5px #aaa;
+  //     width: calc(50% - 1rem);
+  //     height: fit-content;
+  //     margin-right: 1rem;
+  //     margin-bottom: 1rem;
+  //     flex-shrink: 0;
+  //     flex-grow: 0;
+  //     border-radius: 3px;
+  //     img {
+  //       flex-shrink: 0;
+  //       margin: 0 auto;
+  //       width: 100%;
+  //       margin: 0;
+  //     }
+  //     .slide-info {
+  //       display: flex;
+  //       padding-left: 0.3rem;
+  //       padding-bottom: 0.3rem;
+  //       img {
+  //         height: 2rem;
+  //         width: 2rem;
+  //         border-radius: 100%;
+  //       }
+  //       .username {
+  //         line-height: 2rem;
+  //         height: 2rem;
+  //         display: block;
+  //         margin-left: 0.4rem;
+  //       }
+  //     }
+  //   }
+  // }
 }
