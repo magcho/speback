@@ -39,9 +39,11 @@
         <div class="file-upload-container" id="clickable-area">
           <%= f.file_field :originfile_path, style: "display: none;", id: "slide-upload" %>
           <div id="insert-text">
-            <div><s>ドラッグ&ドロップ</s></div>
-            <div>クリックでファイルをアップロード</div>
-            <div><i class="fas fa-file-upload"></i></div>
+            <div class="please-mess"><s>ドラッグ&ドロップ</s></div>
+            <div class="please-mess">クリックでファイルをアップロード</div>
+            <div class="uploaded-mess" id="file-name"></div>
+            <div class="uploaded-mess"><i class="far fa-file-pdf"></i></div>
+            <div class="please-mess"><i class="fas fa-file-upload"></i></div>
             <div>PDFファイル 10MBまで</div>
           </div>
         </div>
@@ -109,11 +111,26 @@
   document.getElementById('clickable-area').addEventListener('click', function(){
     document.getElementById('slide-upload').click()
   })
-  document.getElementById('clickable-area').addEventListener('drop', function(e){
-    e.stopPropagation();
+  var areaEle = document.getElementById('clickable-area')
+
+  areaEle.addEventListener('dragenter', function(e){
+    e.preventDefault()
+  })
+  areaEle.addEventListener('dragover',function(e){
+    e.preventDefault()
+  })
+  areaEle.addEventListener('drop', function(e){
     e.preventDefault();
-    console.log('xs')
-    document.getElementById('slide-uplpad').file = e.dataTransfer.files
-  },false)
+    var files = e.target.files || e.dataTransfer.files;
+    document.getElementById('slide-upload').files = files
+    previewFileDetail()
+  })
+
+  function previewFileDetail(){
+    var name = document.getElementById('slide-upload').files[0].name
+    document.getElementById('clickable-area').classList.add('show')
+    document.getElementById('file-name').innerText = name
+    
+  }
 </script>
 

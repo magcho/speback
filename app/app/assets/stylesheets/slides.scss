@@ -6,6 +6,23 @@
   #slide-event{
     padding-left: 1rem;
   }
+  #clickable-area{
+    .uploaded-mess{
+      display: none;
+    }
+    .please-mess{
+      display: block;
+    }
+    &.show{
+      border-color: #0077e7 !important;
+      .uploaded-mess{
+        display: block;
+      }
+      .please-mess{
+        display: none;
+      }
+    }
+  }
   #slide-draft-radio{
     display: flex;
     input[type=radio]{
