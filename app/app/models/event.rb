@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_many :Hashtags
+  has_many :hashtags
   has_many :slides
   mount_uploader :coverimg_path, CoverimgUploader
   default_scope -> { order(created_at: :desc) }

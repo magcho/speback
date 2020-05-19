@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   # twitter login
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  resources :users
+  resources :users, only: [:show, :destory]
   get '/upload', to: 'slides#new'
   resources :slides do
-    resources :pages
+    resources :pages, only: [:show, :create]
   end
   resources :events
 end

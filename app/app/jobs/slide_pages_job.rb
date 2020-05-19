@@ -10,13 +10,12 @@ class SlidePagesJob < ApplicationJob
     pdf = Grim.reap(originfile_path.path)
     tmpPath = FileUtils.mkdir_p(Rails.root.join "tmp", "pdfs", slide_id.to_s).first
 
-    pdf.each_with_index do |page, i|
-      if page.save("#{tmpPath}/#{i}.png")
+    Parallel.each(0..(pdf.count - 1)) do |i|
+      if pdf[i].save("#{tmpPath}/#{i}.png")
         page = slide.pages.build(page_num: i)
         File.open("#{tmpPath}/#{i}.png") do |f|
           page.img = f
         end
-
         page.save
       end
     end
