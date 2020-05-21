@@ -34,15 +34,26 @@ User.create!(
 
 
 #slides
-Slide.create!(
-  user_id: 1,
-  title: 'サンプルスライド',
-  summary: "これはサンプルです" * 100,
-  draft: false,
-  start_at: Time.zone.now,
-  close_at: Time.zone.now + 2.hours,
-  originfile_path: 'asdf',
-)
+# slide1 = Slide.new(
+#   user_id: 1,
+#   title: 'サンプルスライド1',
+#   summary: "これはサンプルです" * 100,
+#   draft: false,
+#   start_at: Time.zone.now,
+#   close_at: Time.zone.now + 2.hours,
+#   originfile_path: File.open('/app/db/seedfiles/slide1.pdf')
+# )
+# slide1.save()
+
+# Slide.create!(
+#   user_id: 1,
+#   title: 'サンプルスライド2',
+#   summary: "これはサンプルです" * 100,
+#   draft: false,
+#   start_at: Time.zone.now,
+#   close_at: Time.zone.now + 2.hours,
+#   originfile_path: File.open('/app/db/seedfiles/slide2.pdf')
+# )
 
 #events
 Event.create!(
@@ -65,4 +76,11 @@ Hashtag.create!(
 Hashtag.create!(
   name: 'サンプルカンファレンス',
   event_id: 1
+)
+
+# comment
+Comment.create!(
+  text: 'asfasasf',
+  user: User.first,
+  page: Page.first
 )

@@ -152,15 +152,20 @@
     <div id="comment-form"> 
       <div class="icon" style="background-image: url(<%= @slide.user.icon_path %>);"></div>
       <div class="user-name"><%= @slide.user.name %></div>
-      <form action="">
+      <!-- <form action=""> -->
+      <%= form_for(@comment, remote: true) do |f| %>
+        <%= f.text_field :text %>
+        <%= f.text_field :page_id, value: @page.id %>
         <div contenteditable class="text-area">
           <span class="hashtag">#sample</span>asdfasdf
         </div>
         <div class="button-area">
           <span class="length">120/120</span>
-          <button type="submit">ツイート</button>
-        </div>          
-      </form>
+          <%= f.submit 'ツイート' %>
+          <!-- <button type="submit">ツイート</button> -->
+        </div>    
+      <% end %>      
+      <!-- </form> -->
     </div>
   </div>
   
