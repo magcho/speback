@@ -94,13 +94,25 @@
           # class: "pure-u-1"
         %>
         <input type="text" id="event-hashtag" class="pure-u-1" placeholder="(例) #hogeConf,#fugaLT" name="hashtags"/>
-        <div id="coverimg-area">
-          <label for="event-coverimg" class="has-description">イベントバナー画像</label>
-          <span class="description">PNG JPG GIF 1MBまで</span>
-          <%= f.file_field :coverimg_path, 
-            accept: "image/png,image/jpeg,iamge/gif",
-            id: 'event-coverimg' %>
+
+        <label for="event-coverimg" class="has-description">イベントバナー画像</label>
+        <div id="coverimg-area" class="file-upload-container">
+          <div id="event-clickable">
+            <%= f.file_field :coverimg_path, 
+              accept: "image/png,image/jpeg,iamge/gif",
+              id: 'event-coverimg',
+              style: "display: none" %>
+            <img alt="coverimage preview" id="uploader-preview">
+            <div id="insert-text">
+              <div>ドラッグ&ドロップ</div>
+              <div>クリックでファイルをアップロード</div>
+              <div class="uploaded-mess" id="file-name"></div>
+              <div class="please-mess"><i class="fas fa-file-upload"></i></div>
+              <div class="description">PNG JPG GIF 1MBまで</div>
+            </div>
+          </div>
         </div>
+        
         <div id="button-area">
           <%= f.submit "イベントを登録",
             class: "pure-button pure-button-primary" %>  
@@ -109,4 +121,24 @@
     <% end %>
   </div>
 </div>
+<script>
+  document.getElementById('event-clickable').addEventListener('click', function(){
+    document.getElementById('event-coverimg').click()
+  })
+  document.getElementById('event-coverimg').addEventListener('change',function(){
+    previewImg()
+  })
 
+  function previewImg(){
+    var fileReader = new FileReader();
+    var file = document.getElementById('event-coverimg').files[0]
+
+    previewEle = document.getElementById('uploader-preview')
+    fileReader.addEventListener('load', (function(){
+      previewEle.src = fileReader.result
+    }))
+    fileReader.readAsDataURL(file)
+    document.getElementById('file-name').innerText = file.name
+    document.getElementById('event-clickable').classList.add('show')
+  }
+</script>

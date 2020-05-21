@@ -50,8 +50,6 @@ class EventsController < ApplicationController
 
       new_hashtags = oneline_to_array(params[:hashtags])
 
-      p old_hashtags
-      p new_hashtags
       delete_tags = old_hashtags - new_hashtags
       if delete_tags.any?
         delete_tags.each do |tag|

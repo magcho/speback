@@ -47,7 +47,6 @@
 }
 
 #event-slides{
-  // justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
   article{
@@ -55,40 +54,7 @@
     margin: 0.5rem;
   }
 }
-// .slides-view{
-//   display: flex;
-//   width: 100%;
-//   flex-wrap: wrap;
-//   article {
-//     box-shadow: 0 0 5px #aaa;
-//     width: calc(100% / 3 - 2rem);
-//     margin: 2rem 1rem;
-//     flex-shrink: 0;
-//     border-radius: 3px;
-//     img {
-//       flex-shrink: 0;
-//       margin: 0 auto;
-//       width: 100%;
-//       margin: 0;
-//     }
-//     .slide-info {
-//       display: flex;
-//       padding-left: 0.3rem;
-//       padding-bottom: 0.3rem;
-//       img {
-//         height: 2rem;
-//         width: 2rem;
-//         border-radius: 100%;
-//       }
-//       .username {
-//         line-height: 2rem;
-//         height: 2rem;
-//         display: block;
-//         margin-left: 0.4rem;
-//       }
-//     }
-//   }
-// }
+
 
 
 #new-container{
@@ -104,6 +70,9 @@
     padding: 3rem;
     margin: auto;
     background-color: white;
+    max-width: 70%;
+    // width: fit-content;
+    // position: relative;
     h1{
       width: 100%;
       text-align: center;
@@ -111,6 +80,8 @@
     form{
       fieldset{
         border: none;
+        position: relative;
+        width: 100%;
       }
       label{
         color: #333;
@@ -153,19 +124,54 @@
       #slide-description{
         min-height: 8rem;
       }
+      #event-clickable{
+        width: 100%;
+        &.show{
+          .please-mess{
+            display: none;
+          }
+          .uploaded-mess{
+            display: block;
+          }
+          #uploader-preview{
+            display: block;
+          }
+        }
+      }
       .file-upload-container{
         width: 100%;
         min-width: 50vw;
         border-radius: 4px;
         border: 2px #bbb dashed;
-        padding: 3rem;
+        // padding: 3rem;
         margin-bottom: 1rem;
         &:hover{
           background-color: #eee;
         }
+        #uploader-preview, #uploader-edit-preview{
+          // max-height: 400px;
+          // overflow: hidden;
+          // max-width: 100%;
+          width: 100%;
+          margin: auto;
+          display: none;
+          &:hover{
+            filter: grayscale(50%);
+          }
+          &#uploader-edit-preview{
+            display: block;
+          }
+        }
         #insert-text{
           margin: auto;
           text-align: center;
+          // margin: 0 auto;
+          height: fit-content;
+          position: relative;
+          
+          div{
+            z-index: 1;
+          }
           i{
             font-size: 2rem;
             margin: 1rem;
