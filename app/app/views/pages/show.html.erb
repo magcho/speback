@@ -162,8 +162,8 @@
          <% end %>
         </div>
         <div class="button-area">
-          <span class="length">120/120</span>
-          <%= f.submit 'ツイート' %>
+          <span id="comment-length"></span>
+          <%= f.submit 'ツイート', id: 'comment-submit',class: 'err', disabled:true %>
         </div>    
       <% end %>      
     </div>
@@ -214,9 +214,7 @@
     })
 
     childNodes = childNodes.filter(node=>(node !== ''))
-    // var text = document.getElementById('comment-editable-area').innerHTML.replace(/^\s*/,'').replace(/<span(.*?)<\/span>/g,'').replace('&nbsp;',' ')
     document.getElementById('comment–text-input').value = childNodes.join(' ');
-
   })
   commentFromEle.addEventListener('ajax:complete', function(e){
     var res = JSON.parse(e.detail[0].response)
@@ -230,6 +228,21 @@
         buff += '<span contenteditable="false" class="hashtag">#' + hashtag + "</span>" + " "
       })
       editableAreaEle.innerHTML = buff;
+    }
+  })
+  document.getElementById('comment-editable-area').addEventListener('keyup', (e)=>{
+    const length = e.srcElement.textContent.length
+    const commentLengthEle = document.getElementById('comment-length')
+    const submitEle = document.getElementById('comment-submit')
+    commentLengthEle.textContent = length + '/120'
+    if(length > 120){
+      commentLengthEle.classList.add('err')
+      submitEle.classList.add('err')
+      submitEle.disabled = true
+    }else{
+      commentLengthEle.classList.remove('err')
+      submitEle.classList.remove('err')
+      submitEle.disabled = false
     }
   })
   

@@ -207,10 +207,13 @@
           align-items: center;
           padding: 0 1rem;
           margin-top: 0.5rem;
-          .length{
+          #comment-length{
             font-size: 0.8rem;
             color: #aaa;
             margin-right: 0.5rem;
+            &.err{
+              color: red;
+            }
           }
           input[type=submit]{
             background-color: #0093EE;
@@ -218,6 +221,9 @@
             box-sizing: border-box;
             border-radius: 1rem;
             color: white;
+            &.err{
+              background-color: #044e7b;
+            }
           }  
         }
       }

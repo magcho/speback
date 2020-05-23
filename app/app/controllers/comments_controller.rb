@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(text: text)
     @comment.page = Page.find_by(slide: params[:slide_id], page_num: params[:page_num])
     
-    postTweet(params[:text])
+    # postTweet(params[:text])
 
     if @comment.save
       # flash[:success] = "コメントを投稿しました"
