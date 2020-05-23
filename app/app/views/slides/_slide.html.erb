@@ -1,17 +1,17 @@
 <article>
   <%= link_to slide do %>
-    <% if slide.pages.first %>
-      <div class="thumbnail" style="background-image: url(<%= slide.pages.first.img.url %>);background-color: <%= get_dominant_color(slide.pages.first.img.path) %>;"></div>
+    <% if slide.pages.find_by(page_num: 0) %>
+      <div class="thumbnail" style="background-image: url(<%= slide.pages.find_by(page_num: 0).img.url %>);background-color: <%= get_dominant_color(slide.pages.find_by(page_num: 0).img.path) %>;"></div>
     <% else %>
       <div class="thumbnail no-file"></div>
     <% end %>
   <% end %>
   <div class="slide-info">
     <%= link_to slide.user do %>
-      <%= image_tag 'icon.png' %>
-    <% end %>  
+      <%= image_tag slide.user.icon_path %>
+    <% end %>
     <%= link_to slide.user do %>
-      <span class="username">magcho</span>
+      <span class="username"><%= slide.user.name %></span>
     <% end %>
   </div>
 </article>

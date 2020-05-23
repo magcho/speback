@@ -13,6 +13,10 @@ class SessionsController < ApplicationController
     end
     user_data = request.env['omniauth.auth']
     user = User.find_by(twitter_uid: user_data[:uid])
+    
+    session[:access_token] = user_data[:credentials][:token]
+    session[:access_token_secret] = user_data[:credentials][:secret]
+
     if user #既存ユーザーチェック
       log_in user
       flash[:success] = user.name + 'でログインしました'

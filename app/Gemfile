@@ -5,6 +5,7 @@ ruby '2.6.6'
 
 gem 'dotenv-rails'
 gem 'omniauth-twitter'
+gem 'twitter'
 gem 'font-awesome-sass'
 gem 'semantic-ui-sass'
 gem 'i18n'

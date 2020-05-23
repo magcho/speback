@@ -16,5 +16,7 @@ Rails.application.routes.draw do
     resources :pages, only: [:show, :create]
   end
   resources :events
-  resources :comments, only: [:create]
+  
+  post '/slides/:slide_id/pages/:page_num/comments', to: 'comments#create'
+
 end

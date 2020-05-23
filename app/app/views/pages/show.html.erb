@@ -150,22 +150,22 @@
     </div>
 
     <div id="comment-form"> 
-      <div class="icon" style="background-image: url(<%= @slide.user.icon_path %>);"></div>
-      <div class="user-name"><%= @slide.user.name %></div>
-      <!-- <form action=""> -->
-      <%= form_for(@comment, remote: true) do |f| %>
-        <%= f.text_field :text %>
-        <%= f.text_field :page_id, value: @page.id %>
-        <div contenteditable class="text-area">
-          <span class="hashtag">#sample</span>asdfasdf
+      <div class="user-infomation-area">
+        <div class="icon" style="background-image: url(<%= @slide.user.icon_path %>);"></div>
+        <span class="user-name"><%= @slide.user.name %></span>
+      </div>
+      <%= form_with(url: "/slides/#{@slide.id}/pages/#{@page.page_num}/comments", remote: true, id: 'comment-form') do |f| %>
+        <%= f.text_field :text, id: 'comment–text-input', style: 'display:none;' %>
+        <div contenteditable="true" class="text-area" id="comment-editable-area">
+         <% if @event.hashtags.any? %>
+          <%= render @event.hashtags %>
+         <% end %>
         </div>
         <div class="button-area">
           <span class="length">120/120</span>
-          <%= f.submit 'ツイート' %>
-          <!-- <button type="submit">ツイート</button> -->
+          <%= f.submit 'ツイート' %>
         </div>    
       <% end %>      
-      <!-- </form> -->
     </div>
   </div>
   
@@ -187,13 +187,52 @@
     <% if @related_slides %>
       <%= render @related_slides %>
     <% end %>
-  </div>
+  </div>
 </div>
 
 <script>
   document.addEventListener("turbolinks:load", function(){
     document.getElementById('comment-area').style.setProperty('--height',`${document.getElementById('slide-img').clientHeight}px`)
   })
+  var commentFromEle = document.getElementById('comment-form')
+  commentFromEle.addEventListener('ajax:before', function(e){
+    const ELEMENT_NODE = 1
+    const TEXT_NODE = 3
+    let childNodes = Array.from(document.getElementById('comment-editable-area').childNodes).map((node)=>{
+      switch (node.nodeType) {
+        case ELEMENT_NODE:
+          return node.textContent.replace(/\s*/g, '')
+          break;
+
+        case TEXT_NODE:
+          return node.textContent.replace(/^\s*/,'')
+          break
+
+        default:
+          return ''
+      }
+    })
+
+    childNodes = childNodes.filter(node=>(node !== ''))
+    // var text = document.getElementById('comment-editable-area').innerHTML.replace(/^\s*/,'').replace(/<span(.*?)<\/span>/g,'').replace('&nbsp;',' ')
+    document.getElementById('comment–text-input').value = childNodes.join(' ');
+
+  })
+  commentFromEle.addEventListener('ajax:complete', function(e){
+    var res = JSON.parse(e.detail[0].response)
+
+    if(e.detail[1] == 'OK'){
+      // reset hashtags
+      var editableAreaEle = document.getElementById('comment-editable-area')
+      editableAreaEle.innerHTML = ""
+      var buff = ""
+      res.hashtags.map(function(hashtag){
+        buff += '<span contenteditable="false" class="hashtag">#' + hashtag + "</span>" + " "
+      })
+      editableAreaEle.innerHTML = buff;
+    }
+  })
+  
 </script>
 <script data-turbolinks-eval="false">
   // 初期レンダリング時のみ実行
