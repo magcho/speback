@@ -21,4 +21,9 @@ module ApplicationHelper
     origin_date.strftime("%m/%d %H:%M")
   end
 
+  # datetime型から時間だけ表示
+  def datetime_to_time(origin_date)
+    origin_date.strftime("%H:%M")
+  end
+
 end

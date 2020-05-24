@@ -4,6 +4,9 @@ class CommentsController < ApplicationController
     @comment = Comment.new
   end
 
+  def show
+  end
+
   def create
     text = params[:text].gsub(/#\S*\s+/,'')
     @comment = current_user.comments.build(text: text)
