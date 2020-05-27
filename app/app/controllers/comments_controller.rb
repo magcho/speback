@@ -7,18 +7,32 @@ class CommentsController < ApplicationController
   def show
   end
 
+  # def fetch_comment
+  #   render json: getTweets(['#sushi', '#tabetai'])
+  # end
+
   def create
-    text = params[:text].gsub(/#\S*\s+/,'')
-    @comment = current_user.comments.build(text: text)
-    @comment.page = Page.find_by(slide: params[:slide_id], page_num: params[:page_num])
+
+    if !logged_in?
+      render json: {message: "no login"}, status: 403
+      return
+    end
     
-    # postTweet(params[:text])
+    tweet_id = postTweet(params[:text])
+
+    text = params[:text].gsub(/#\S*\s+/,'')
+    # @comment = current_user.comments.build(text: text)
+    @comment = Comment.new(icon_url: current_user.icon_path, text: text)
+    @comment.page = Page.find_by(slide: params[:slide_id], page_num: params[:page_num])
+    @comment.tweet_id = tweet_id.id
+
+    
 
     if @comment.save
       # flash[:success] = "コメントを投稿しました"
       
-      event = Event.find(Slide.find(params[:slide_id]).event_id)
-      if event.hashtags.any?
+      event = Event.where(id: Slide.find(params[:slide_id]).event_id).first
+      if event && event.hashtags.any?
         hashtags = event.hashtags.map do |hashtag|
           hashtag.name
         end
@@ -29,14 +43,16 @@ class CommentsController < ApplicationController
           }
         }
         render json: payload, status: 200
-
+        return
       else
-        render json: {message: 'success'}, status: 200
+        render json: {message: 'success', hashtags: []}, status: 200
         # render root_path
+        return
       end
     else
       # flash[:error] = "コメントの投稿に失敗しました"
       render json: {message: 'error'}, status: 422
+      return
     end
   end
   
@@ -61,4 +77,6 @@ class CommentsController < ApplicationController
       return false
     end
   end
+
+  
 end

@@ -1,6 +1,8 @@
 <div class="comment">
-  <div class="comment-icon" style="background-image: url(<%= comment.user.icon_path %>);"></div>
-  <p class="comment-text">
+  <%= link_to "http://twitter.com/twitter/status/#{comment.tweet_id}", target: '_blank' do %>
+    <div class="comment-icon" style="background-image: url(<%= comment.icon_url %>);"></div>
+  <% end %>
+    <p class="comment-text">
     <span class="comment-time"><%= datetime_to_time(comment.created_at) %></span>
     <%= comment.text %>
   </p>

@@ -31,8 +31,49 @@ class SlidesController < ApplicationController
     end
   end
 
+  def fetch_comment
+    @slide = Slide.find(params[:slide_id])
+    if @slide.event_id
+      @event = Event.where(id: @slide.event_id).first
+      query = []
+      @event.hashtags.each do |hashtag|
+        query.push(hashtag.name)
+      end
+      render json: getTweets(query)
+    else
+      render json: {message: 'no event'}
+    end
+  end
+
   private 
     def slide_params
       params.require(:slide).permit(:title, :originfile_path, :start_at, :close_at, :summary, :draft)
+    end
+
+    # hashtagsの含まれるツイートをapiで取得しCommentに追加
+    def getTweets(hashtags)
+      client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = ENV['TWITTER_API_KEY']
+        config.consumer_secret     = ENV['TWITTER_API_SECRET']
+      end
+      hashtags.map!{|hashtag| '#'+hashtag}
+      query = "(#{hashtags.join(" AND ")}) -filter:replies"
+
+      res = client.search(query, {count: 100, result_type: "recent", exclude: "retweets"})
+      
+
+      page_id = 14 # 開発用仮の対象指定
+
+      res.each do |tweet|
+        text = tweet.full_text.to_s
+        hashtags.each do |hashtag|
+          text = text.gsub('#'+hashtag.to_s, '') # want fix
+        end
+        text = text.gsub(/^\s+/,'')
+
+        @comment = Comment.new(text: text, page_id: page_id, tweet_id: tweet.id)
+        @comment.icon_url = tweet.user.profile_image_url().to_s if tweet.user.profile_image_url?
+        @comment.save
+      end
     end
 end

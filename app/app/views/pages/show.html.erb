@@ -58,7 +58,7 @@
       <%= form_with(url: "/slides/#{@slide.id}/pages/#{@page.page_num}/comments", remote: true, id: 'comment-form') do |f| %>
         <%= f.text_field :text, id: 'comment–text-input', style: 'display:none;' %>
         <div contenteditable="true" class="text-area" id="comment-editable-area">
-         <% if @event.hashtags.any? %>
+         <% if @event && @event.hashtags.any? %>
           <%= render @event.hashtags %>
          <% end %>
         </div>

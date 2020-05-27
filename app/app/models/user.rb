@@ -3,7 +3,7 @@ class User < ApplicationRecord
             class_name: "Slide",
             foreign_key: "user_id",
             dependent: :destroy
-  has_many :comments
+  # has_many :comments
 
   validates :name, presence: true
   validates :twitter_uid, presence: true

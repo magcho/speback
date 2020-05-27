@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_153658) do
+ActiveRecord::Schema.define(version: 2020_05_25_161642) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "text"
-    t.bigint "user_id", null: false
     t.bigint "page_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "icon_url"
+    t.string "tweet_id"
     t.index ["page_id"], name: "index_comments_on_page_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["tweet_id"], name: "index_comments_on_tweet_id", unique: true
   end
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -74,7 +75,6 @@ ActiveRecord::Schema.define(version: 2020_05_21_153658) do
   end
 
   add_foreign_key "comments", "pages"
-  add_foreign_key "comments", "users"
   add_foreign_key "hashtags", "events"
   add_foreign_key "pages", "slides"
   add_foreign_key "slides", "users"
