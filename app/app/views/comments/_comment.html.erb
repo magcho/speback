@@ -3,7 +3,6 @@
     <div class="comment-icon" style="background-image: url(<%= comment.icon_url %>);"></div>
   <% end %>
     <p class="comment-text">
-    <span class="comment-time"><%= datetime_to_time(comment.created_at) %></span>
-    <%= comment.text %>
+    <span class="comment-time"><%= datetime_to_time(comment.created_at) %></span><%= comment.text %>
   </p>
 </div>

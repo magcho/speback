@@ -1,3 +1,4 @@
+# coding: utf-8
 class CommentsController < ApplicationController
 
   def new
@@ -13,18 +14,20 @@ class CommentsController < ApplicationController
 
   def create
 
+  
+
     if !logged_in?
       render json: {message: "no login"}, status: 403
       return
     end
     
-    tweet_id = postTweet(params[:text])
+    tweet = postTweet(params[:text])
 
     text = params[:text].gsub(/#\S*\s+/,'')
     # @comment = current_user.comments.build(text: text)
     @comment = Comment.new(icon_url: current_user.icon_path, text: text)
     @comment.page = Page.find_by(slide: params[:slide_id], page_num: params[:page_num])
-    @comment.tweet_id = tweet_id.id
+    @comment.tweet_id = tweet.id
 
     
 
@@ -42,17 +45,26 @@ class CommentsController < ApplicationController
             "message" => "success"
           }
         }
+
+
+        broadcastPayload = {
+          "icon_url" => current_user.icon_path,
+          "text" => text,
+          "tweet_id" => tweet.id,
+          "created_at"=> tweet.created_at.strftime("%H:%M")
+        }
+        ActionCable.server.broadcast "room1", broadcastPayload
         render json: payload, status: 200
-        return
+        
       else
         render json: {message: 'success', hashtags: []}, status: 200
         # render root_path
-        return
+        
       end
     else
       # flash[:error] = "コメントの投稿に失敗しました"
       render json: {message: 'error'}, status: 422
-      return
+      
     end
   end
   

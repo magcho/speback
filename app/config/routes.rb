@@ -16,7 +16,9 @@ Rails.application.routes.draw do
     resources :pages, only: [:show, :create]
   end
   resources :events
-  
+
   post '/slides/:slide_id/pages/:page_num/comments', to: 'comments#create'
   get '/slides/:slide_id/fetch', to: 'slides#fetch_comment'
+
+  mount ActionCable.server => '/cable'
 end

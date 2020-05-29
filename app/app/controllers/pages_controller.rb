@@ -19,5 +19,6 @@ class PagesController < ApplicationController
 
     @previousPage = Page.find_by(slide_id: @slide.id, page_num: params[:id].to_i - 1) if Page.find_by(slide_id: @slide.id, page_num: params[:id].to_i  - 1)
     @nextPage = Page.find_by(slide_id: @slide.id, page_num: params[:id].to_i + 1) if Page.find_by(slide_id: @slide.id, page_num: params[:id].to_i  + 1)
+
   end
 end

@@ -118,6 +118,7 @@
     document.getElementById('comment–text-input').value = childNodes.join(' ');
   })
   commentFromEle.addEventListener('ajax:complete', function(e){
+		console.log(e)
     var res = JSON.parse(e.detail[0].response)
 
     if(e.detail[1] == 'OK'){

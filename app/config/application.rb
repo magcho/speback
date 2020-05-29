@@ -1,3 +1,4 @@
+# coding: utf-8
 require_relative 'boot'
 
 require 'rails/all'
@@ -18,5 +19,7 @@ module App
 
     # ActiveJobがSidekiqを使うことを宣言
     # config.active_job.queue_adapter = :sidekiq
+
+    config.hosts << "magcho.local"
   end
 end
