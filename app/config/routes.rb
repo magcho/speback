@@ -21,4 +21,10 @@ Rails.application.routes.draw do
   get '/slides/:slide_id/fetch', to: 'slides#fetch_comment'
 
   mount ActionCable.server => '/cable'
+
+  namespace :api do
+    namespace :v1 do
+      post 'page_change', to: 'presenters#page_change'
+    end
+  end
 end

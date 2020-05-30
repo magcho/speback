@@ -48,6 +48,7 @@ class CommentsController < ApplicationController
 
 
         broadcastPayload = {
+          "mode" => 'comment',
           "icon_url" => current_user.icon_path,
           "text" => text,
           "tweet_id" => tweet.id,
