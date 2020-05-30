@@ -53,7 +53,7 @@ class CommentsController < ApplicationController
           "tweet_id" => tweet.id,
           "created_at"=> tweet.created_at.strftime("%H:%M")
         }
-        ActionCable.server.broadcast "room1", broadcastPayload
+        ActionCable.server.broadcast "presentation_#{params[:slide_id]}", broadcastPayload
         render json: payload, status: 200
         
       else

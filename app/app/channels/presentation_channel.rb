@@ -1,9 +1,7 @@
 class PresentationChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "some_channel"
-    # slide = Slides.find(params[:slide_id])
-    # stream_for slide
-    stream_from "room1"
+
+    stream_from "presentation_#{params[:slide_id]}"
   end
 
   def unsubscribed
