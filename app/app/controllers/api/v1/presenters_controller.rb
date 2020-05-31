@@ -16,8 +16,10 @@ class Api::V1::PresentersController < ApplicationController
     ActionCable.server.broadcast "presentation_#{params[:slide_id]}", broadcastData
 
 
-    payload = {
-      "message" => "hello"
+    payload ={
+      "mode" => "page",
+      "page_num" => params[:page_num],
+      "slide_id"=>params[:slide_id]
     }
     render json: payload
     return
