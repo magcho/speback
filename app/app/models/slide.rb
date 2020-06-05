@@ -9,7 +9,6 @@ class Slide < ApplicationRecord
   validates :title, presence: true
   validates :originfile_path, presence: true
   validates :summary, length: {maximum: 3000}
-  validates :livecast, presence: true
   validate :checkAfterCloseAt
 
 

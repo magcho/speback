@@ -1,15 +1,18 @@
+# coding: utf-8
 class SlidesController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
   def show
-    # @slide = Slide.find(params[:id])
-    # @page = Page.find_by(slide_id: @slide.id, page_num: 0)
-    # @user = @slide.user
 
-    # @nextPage = Page.find_by(slide_id: @slide.id, page_num: 1) if Page.find_by(slide_id: @slide.id, page_num: 1)
-    # render 'pages/show'
+    @slide = Slide.find(params[:id])
 
-    redirect_to slide_page_path(params[:id], 0)
+    # プレゼン中であればプレゼンターと同じページに遷移
+    if @slide.livecast
+      redirect_to slide_page_path(@slide, @slide.current_presenter_page_num)
+    else
+      # プレゼン中でなければ最初から
+      redirect_to slide_page_path(@slide, 0)
+    end
   end
 
   def new
