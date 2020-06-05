@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'page_change', to: 'presenters#page_change'
+      post 'presentation_status', to: 'presentation#status'
     end
   end
 end
