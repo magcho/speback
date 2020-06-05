@@ -15,6 +15,9 @@ class Api::V1::PresentersController < ApplicationController
     }
     ActionCable.server.broadcast "presentation_#{params[:slide_id]}", broadcastData
 
+    @slide = Slide.find(params[:slide_id])
+    @slide.update(livecast: true, current_presenter_page_num: params[:page_num])
+    @slide.save
 
     payload ={
       "mode" => "page",

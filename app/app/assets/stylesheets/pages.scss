@@ -2,25 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-@import 'partial/slide';
+@import "partial/slide";
 
-#slide-show{
+#slide-show {
   display: grid;
   margin-top: 3rem;
   width: 100vw;
   grid-template-columns: 2fr 1fr;
   background-color: #181818;
-  #slide{
+  #slide {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     position: relative;
     margin: 1rem;
     margin-right: 0.5rem;
     overflow-y: hidden;
-    img{
+    img {
       width: 100%;
     }
-    #slide-img{
+    #slide-img {
       // 100% * (9/16) = 56.25%
       padding-top: 56.25%;
       width: 100%;
@@ -30,7 +30,7 @@
       background-repeat: no-repeat;
     }
 
-    #control{
+    #control {
       z-index: 3;
       position: absolute;
       top: 0;
@@ -40,49 +40,91 @@
       padding: 0;
       margin: 0;
       transition: transform 0.3s;
-      &:hover{
+      &:hover {
         transform: translateY(-3rem);
       }
-      .clickable{
+      .clickable {
         position: absolute;
         top: 0;
         left: 0;
         height: calc(100% - 3rem);
         width: 50%;
         z-index: 2;
-        &#previous-clickable{
+        &#previous-clickable {
           left: 0;
+          cursor: w-resize;
         }
-        &#next-clickable{
+        &#next-clickable {
           left: 50%;
+          cursor: e-resize;
         }
       }
-      #player-control{
+      #player-control {
         position: absolute;
         bottom: 0;
         width: 100%;
         display: flex;
         padding: 0 1rem;
         background-color: #0002;
-        .previous-button,.next-button{
+        .previous-button,
+        .next-button {
           width: 1.5rem;
         }
-        i{
+        i {
           color: white;
           line-height: 3rem;
           font-size: 1.5rem;
           padding-right: 1rem;
-          &:hover{
+          &:hover {
             color: #999;
           }
-          a{
+          a {
             text-decoration: none;
           }
         }
       }
     }
+
+    #livecast-container {
+      position: absolute;
+      bottom: 3rem;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .back-button {
+        background-color: black;
+        border: 2px solid gray;
+        color: white;
+        opacity: 0.3;
+        z-index: 3;
+        cursor: pointer;
+        display: none;
+        position: absolute;
+
+        &:hover {
+          opacity: 1;
+        }
+        &.backward {
+          left: 0;
+        }
+        &.forward {
+          right: 0;
+        }
+
+        transition: 0.3s opacity;
+
+        span {
+          height: 1.5rem;
+          line-height: 1.5rem;
+        }
+        i {
+          padding: 0.2rem;
+        }
+      }
+    }
   }
-  #comment-area{
+  #comment-area {
     color: white;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
@@ -91,25 +133,25 @@
     margin-left: 0.5rem;
     position: relative;
     height: var(--height);
-    #header{
+    #header {
       height: 2.5rem;
       padding: 0 1rem;
       width: 100%;
       background-color: #222;
-      span{
+      span {
         line-height: 2.5rem;
       }
     }
-    #comments{
+    #comments {
       padding: 0 1rem;
       overflow-y: scroll;
       display: block;
       height: calc(100% - 2.5rem);
       padding-bottom: 60%;
-      .comment{
+      .comment {
         display: flex;
         margin: 0.5rem 0;
-        .comment-icon{
+        .comment-icon {
           flex-grow: 0;
           flex-shrink: 0;
           width: 1.5rem;
@@ -120,14 +162,14 @@
           background-size: cover;
           background-color: #222;
         }
-        .comment-time{
+        .comment-time {
           color: #aaa;
           font-size: 0.6rem;
           height: 1.5rem;
           line-height: 1.5rem;
           margin-right: 1rem;
         }
-        .comment-text{
+        .comment-text {
           margin: 0;
           min-height: 1.5rem;
           line-height: 1.5rem;
@@ -135,18 +177,18 @@
         }
       }
     }
-    #comment-form{
+    #comment-form {
       background-color: #222;
       position: absolute;
       bottom: 0;
       width: 100%;
       // margin-top: 100%;
-      .user-infomation-area{
+      .user-infomation-area {
         width: 100%;
         height: 1.5rem;
         position: relative;
         display: flex;
-        .icon{
+        .icon {
           height: 1.5rem;
           width: 1.5rem;
           background-repeat: no-repeat;
@@ -155,7 +197,7 @@
           border-radius: 100%;
           margin: 0 1rem;
         }
-        .user-name{
+        .user-name {
           height: 1.5rem;
           line-height: 1.5rem;
           font-size: 0.8rem;
@@ -163,9 +205,9 @@
           margin: 0;
         }
       }
-      form{
+      form {
         position: relative;
-        .text-area{
+        .text-area {
           background-color: #222;
           border: 1px solid #313d4f;
           // border-radius: 3px;
@@ -185,88 +227,88 @@
           padding: 0;
           word-wrap: break-word;
           overflow-wrap: break-word;
-          outline: none; 
-          user-select: text; 
+          outline: none;
+          user-select: text;
 
-          &:focus{
-            border-bottom: solid 3px #0093EE;
+          &:focus {
+            border-bottom: solid 3px #0093ee;
             outline: none;
           }
-          .hashtag{
+          .hashtag {
             display: inline;
             color: #1b95e0;
             word-wrap: break-word;
             overflow-wrap: break-word;
-            outline: none; 
-            user-select: text; 
+            outline: none;
+            user-select: text;
           }
         }
-        .button-area{
+        .button-area {
           display: flex;
           justify-content: flex-end;
           width: 100%;
           align-items: center;
           padding: 0 1rem;
           margin-top: 0.5rem;
-          #comment-length{
+          #comment-length {
             font-size: 0.8rem;
             color: #aaa;
             margin-right: 0.5rem;
-            &.err{
+            &.err {
               color: red;
             }
           }
-          input[type=submit]{
-            background-color: #0093EE;
+          input[type="submit"] {
+            background-color: #0093ee;
             border: 2px solid rgb(1, 112, 180);
             box-sizing: border-box;
             border-radius: 1rem;
             color: white;
-            &.err{
+            &.err {
               background-color: #044e7b;
             }
-          }  
+          }
         }
       }
     }
   }
-  #slide-info{
+  #slide-info {
     background-color: white;
     padding: 1rem;
     padding-top: 2rem;
-    .title{
+    .title {
       margin: 0;
     }
-    #author{
+    #author {
       display: flex;
       margin-bottom: 2rem;
-      .icon{
+      .icon {
         height: 2rem;
         width: 2rem;
         border-radius: 100%;
       }
-      .user-name{
+      .user-name {
         margin-left: 1rem;
         line-height: 2rem;
         height: 2rem;
       }
-      .start-at{
+      .start-at {
         margin-left: 3rem;
         height: 2rem;
         line-height: 2rem;
       }
     }
-    p{
+    p {
       line-height: 1.4rem;
     }
   }
 
-  #related-slides{
+  #related-slides {
     background-color: white;
     flex-wrap: wrap;
     padding-top: 2rem;
     padding-left: 0.5rem;
-    article{
+    article {
       box-sizing: border-box;
       width: calc(50% - 1rem);
       margin: 0;

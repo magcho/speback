@@ -1,3 +1,4 @@
+# coding: utf-8
 class Slide < ApplicationRecord
   belongs_to :user
   # belongs_to :event スライドに必ずイベントがあるわけではないので指定しない
@@ -8,6 +9,7 @@ class Slide < ApplicationRecord
   validates :title, presence: true
   validates :originfile_path, presence: true
   validates :summary, length: {maximum: 3000}
+  validates :livecast, presence: true
   validate :checkAfterCloseAt
 
 

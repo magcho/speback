@@ -1,12 +1,17 @@
 <div id="slide-show">
-  <div id="slide">
+  <div id="slide"
+			 <%= "data-livecast=#{@slide.livecast}" %>
+			 <%= "data-current-presenter-page-num=#{@slide.current_presenter_page_num || -1}" %>
+			 <%= "data-slide-id=#{@slide.id}" %>
+			 <%= "data-page-num=#{@page.page_num}" %>
+	>
     <div id="slide-img" style="background-image: url(<%= @page.img.url %>); background-color: <%= @dominant_color %>"></div>
   
 
     <div id="control">
       <% if @previousPage %>
         <%= link_to slide_page_path(@slide, @previousPage.page_num) do %>
-          <div id="prevous-clickable" class="clickable"></div>
+          <div id="previous-clickable" class="clickable"></div>
         <% end %>
       <% end %>
       <% if @nextPage %>
@@ -35,12 +40,31 @@
           <div class="next-button"></div>
         <% end %>
       </div>
-
+			
     </div>
 
+		
+		<div class="livecast" id="livecast-container">
+			<%= link_to slide_page_path(@slide, @slide.current_presenter_page_num) do  %>
+				<div class="back-button backward" id="backward-button" style="display: <%= presenter_page_back_button_style_display 'backward', @slide, @page %>">
+					<span><i class="fa fa-caret-left" aria-hidden="true"></i>発表中のスライドに戻る</span>				
+				</div>
+			<% end %>
+			<%= link_to slide_page_path(@slide, @slide.current_presenter_page_num) do %>
+				<div class="back-button forward" id="forward-button" style="display: <%= presenter_page_back_button_style_display 'forward', @slide, @page %>">
+					<span>発表中のスライドに戻る<i class="fa fa-caret-right" aria-hidden="true"></i></span>
+				</div>
+			<% end %>
+		</div>
+		
+
   </div>
-  <div id="comment-area">
-    <div id="header">
+	<% if @slide.livecast %>
+    <div id="comment-area" data-turbolinks-permanent>
+	<% else %>
+		<div id="comment-area">
+	<% end %>
+		<div id="header">
       <span>コメントのリプレイ</span>
     </div>
     <div id="comments">
@@ -52,7 +76,7 @@
 
     <div id="comment-form"> 
       <div class="user-infomation-area">
-        <div class="icon" style="background-image: url(<%= @slide.user.icon_path %>);"></div>
+        <div class="icon" style="background-image: url(<%= current_user.icon_path %>);"></div>
         <span class="user-name"><%= @slide.user.name %></span>
       </div>
       <%= form_with(url: "/slides/#{@slide.id}/pages/#{@page.page_num}/comments", remote: true, id: 'comment-form') do |f| %>
@@ -92,8 +116,11 @@
 </div>
 
 <script>
+	
   document.addEventListener("turbolinks:load", function(){
-    document.getElementById('comment-area').style.setProperty('--height',`${document.getElementById('slide-img').clientHeight}px`)
+    if(document.getElementById('comment-area') != null){
+      document.getElementById('comment-area').style.setProperty('--height',`${document.getElementById('slide-img').clientHeight}px`)
+    }
   })
   var commentFromEle = document.getElementById('comment-form')
   commentFromEle.addEventListener('ajax:before', function(e){
@@ -117,6 +144,8 @@
     childNodes = childNodes.filter(node=>(node !== ''))
     document.getElementById('comment–text-input').value = childNodes.join(' ');
   })
+
+	
   commentFromEle.addEventListener('ajax:complete', function(e){
 		console.log(e)
     var res = JSON.parse(e.detail[0].response)
@@ -132,6 +161,8 @@
       editableAreaEle.innerHTML = buff;
     }
   })
+
+	
   document.getElementById('comment-editable-area').addEventListener('keyup', (e)=>{
     const length = e.srcElement.textContent.length
     const commentLengthEle = document.getElementById('comment-length')
@@ -146,12 +177,33 @@
       submitEle.classList.remove('err')
       submitEle.disabled = false
     }
-  })
-  
+  });
+
+	// 自動再生時にユーザーが自分で戻った時最新のスライドに追従するか選択 
+	// var slideEle = document.getElementById('slide');
+	// if(slideEle.getAttribute('data-livecast')== "true"){
+	// 	var presenterPage = slideEle.getAttribute('data-current-presenter-page-num');
+	// 	var pageNum	=	slideEle.getAttribute('data-page-num');
+	// 	var backwordButtonEle = document.getElementById('backword-button');
+	// 	var forwardButtonEle = document.getElementById('forward-button');
+ 	// 	if(presenterPage != pageNum){
+	// 		// プレゼンターとは違うページを開いた時
+	// 		if(presenterPage < pageNum){
+				
+	// 				backwordButtonEle.style.display = 'block';
+	// 		}
+	// 	}else{
+			
+	// 	}
+	// }
+
 </script>
 <script data-turbolinks-eval="false">
   // 初期レンダリング時のみ実行
   window.addEventListener('resize', function(){
-    document.getElementById('comment-area').style.setProperty('--height',`${document.getElementById('slide-img').clientHeight}px`)
-  })
+		if(document.getElementById('comment-area') != null){
+			document.getElementById('comment-area').style.setProperty('--height',`${document.getElementById('slide-img').clientHeight}px`)
+		}
+	})
+													
 </script>
