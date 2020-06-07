@@ -3,7 +3,6 @@ class SlidesController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
   def show
-
     @slide = Slide.find(params[:id])
 
     # プレゼン中であればプレゼンターと同じページに遷移
@@ -16,13 +15,12 @@ class SlidesController < ApplicationController
   end
 
   def new
-    @slide = Slide.new()
+    @slide = Slide.new
   end
 
   def create
     @slide = current_user.slides.build(slide_params)
     if @slide.save
-
       SlidePagesJob.perform_later(@slide.id)
 
       # redirect_to root_path
@@ -44,39 +42,44 @@ class SlidesController < ApplicationController
       end
       render json: getTweets(query)
     else
-      render json: {message: 'no event'}
+      render json: { message: 'no event' }
     end
   end
 
-  private 
-    def slide_params
-      params.require(:slide).permit(:title, :originfile_path, :start_at, :close_at, :summary, :draft)
+  def get_token
+    @slide = Slide.find(params[:slide_id])
+    render json: { token: @slide.token }, status: 200
+  end
+
+  private
+
+  def slide_params
+    params.require(:slide).permit(:title, :originfile_path, :start_at, :close_at, :summary, :draft)
+  end
+
+  # hashtagsの含まれるツイートをapiで取得しCommentに追加
+  def getTweets(hashtags)
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key = ENV['TWITTER_API_KEY']
+      config.consumer_secret = ENV['TWITTER_API_SECRET']
     end
+    hashtags.map! { |hashtag| '#' + hashtag }
+    query = "(#{hashtags.join(' AND ')}) -filter:replies"
 
-    # hashtagsの含まれるツイートをapiで取得しCommentに追加
-    def getTweets(hashtags)
-      client = Twitter::REST::Client.new do |config|
-        config.consumer_key        = ENV['TWITTER_API_KEY']
-        config.consumer_secret     = ENV['TWITTER_API_SECRET']
+    res = client.search(query, { count: 100, result_type: 'recent', exclude: 'retweets' })
+
+    page_id = 14 # 開発用仮の対象指定
+
+    res.each do |tweet|
+      text = tweet.full_text.to_s
+      hashtags.each do |hashtag|
+        text = text.gsub('#' + hashtag.to_s, '') # want fix
       end
-      hashtags.map!{|hashtag| '#'+hashtag}
-      query = "(#{hashtags.join(" AND ")}) -filter:replies"
+      text = text.gsub(/^\s+/, '')
 
-      res = client.search(query, {count: 100, result_type: "recent", exclude: "retweets"})
-      
-
-      page_id = 14 # 開発用仮の対象指定
-
-      res.each do |tweet|
-        text = tweet.full_text.to_s
-        hashtags.each do |hashtag|
-          text = text.gsub('#'+hashtag.to_s, '') # want fix
-        end
-        text = text.gsub(/^\s+/,'')
-
-        @comment = Comment.new(text: text, page_id: page_id, tweet_id: tweet.id)
-        @comment.icon_url = tweet.user.profile_image_url().to_s if tweet.user.profile_image_url?
-        @comment.save
-      end
+      @comment = Comment.new(text: text, page_id: page_id, tweet_id: tweet.id)
+      @comment.icon_url = tweet.user.profile_image_url().to_s if tweet.user.profile_image_url?
+      @comment.save
     end
+  end
 end

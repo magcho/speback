@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_100127) do
+ActiveRecord::Schema.define(version: 2020_06_07_161034) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "text"
@@ -61,9 +61,11 @@ ActiveRecord::Schema.define(version: 2020_06_05_100127) do
     t.text "summary"
     t.boolean "draft"
     t.bigint "event_id"
-    t.boolean "livecast"
+    t.boolean "livecast", default: false
     t.integer "current_presenter_page_num"
+    t.string "token"
     t.index ["event_id"], name: "index_slides_on_event_id"
+    t.index ["token"], name: "index_slides_on_token", unique: true
     t.index ["user_id"], name: "index_slides_on_user_id"
   end
 

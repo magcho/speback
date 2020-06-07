@@ -3,6 +3,7 @@ class Slide < ApplicationRecord
   belongs_to :user
   # belongs_to :event スライドに必ずイベントがあるわけではないので指定しない
   has_many :pages
+  has_secure_token
   default_scope -> { order(created_at: :desc) }
   mount_uploader :originfile_path, SlideUploader
 

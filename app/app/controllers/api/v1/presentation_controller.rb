@@ -1,33 +1,30 @@
 class Api::V1::PresentationController < ApplicationController
-  before_action :check_parms, only:[:status]
+  before_action :check_parms, only: [:status]
   protect_from_forgery unless: :status
 
   def status
-    unless check_token
-      render json: {message: 'token error'},status: 443
+    @slide = Slide.find_by(token: params[:token])
+    if @slide.nil?
+      render json: { message: 'token error' }, status: 443
+      return
     end
 
-    if(params[:status]== 'ready')
-      
-
-      render json: {message:'ready'}
-    elsif(params[:status] == 'start')
-      @slide = Slide.find(params[:slide_id])
+    if (params[:status] == 'ready')
+      render json: { message: 'ready' }, status: 200
+    elsif (params[:status] == 'start')
       @slide.update(livecast: true, current_presenter_page_num: 0)
       if @slide.save
-        render json: {message: 'start'}
+        render json: { message: 'start' }, status: 200
+      else
+        render json: { message: 'error' }, status: 500
       end
-      return
-    elsif(params[:status] == 'finish')
-
-      @slide = Slide.find(params[:slide_id])
+    elsif (params[:status] == 'finish')
       @slide.update(current_presenter_page_num: 0, livecast: false)
       if @slide.save
-        render json: {message: 'finish'}
+        render json: { message: 'finish' }, status: 200
       else
-        render json: {message: 'fatal'}
+        render json: { message: 'error' }, status: 500
       end
-      return
     end
 
     return
@@ -35,14 +32,9 @@ class Api::V1::PresentationController < ApplicationController
 
   private
 
-  def check_token
-    params[:token] == 'aabbcc'
-  end
-
   def check_parms
-    if params[:token].nil? or params[:status].nil? or params[:slide_id].nil?
-      render json: {message: 'params error'}
+    if params[:token].nil? or params[:status].nil?
+      render json: { message: 'params error' }
     end
   end
-
 end

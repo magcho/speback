@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :slides do
     resources :pages, only: [:show, :create]
   end
+  get '/slides/:slide_id/token', to: 'slides#get_token'
   resources :events
 
   post '/slides/:slide_id/pages/:page_num/comments', to: 'comments#create'
