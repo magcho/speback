@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_161034) do
+ActiveRecord::Schema.define(version: 2020_06_08_013305) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "text"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 2020_06_07_161034) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_hashtags_on_event_id"
+  end
+
+  create_table "page_moves", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "page_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["page_id"], name: "index_page_moves_on_page_id"
   end
 
   create_table "pages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -80,6 +87,7 @@ ActiveRecord::Schema.define(version: 2020_06_07_161034) do
 
   add_foreign_key "comments", "pages"
   add_foreign_key "hashtags", "events"
+  add_foreign_key "page_moves", "pages"
   add_foreign_key "pages", "slides"
   add_foreign_key "slides", "users"
 end

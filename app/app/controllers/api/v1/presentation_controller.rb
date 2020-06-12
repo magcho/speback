@@ -18,6 +18,7 @@ class Api::V1::PresentationController < ApplicationController
       else
         render json: { message: 'error' }, status: 500
       end
+      
     elsif (params[:status] == 'finish')
       @slide.update(current_presenter_page_num: 0, livecast: false)
       if @slide.save
